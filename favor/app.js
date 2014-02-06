@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var handlebars = require('express3-handlebars')
 
 var app = express();
 
@@ -15,7 +16,8 @@ var app = express();
 // 3000 doesn't work for me, so I'm changing it to 1234
 app.set('port', process.env.PORT || 1234);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('handlebars', handlebars());
+app.set('view engine', 'handlebars');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
