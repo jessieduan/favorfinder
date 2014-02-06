@@ -1,8 +1,7 @@
 
-/*
- * GET home page.
- */
+// Get all of our friend data
+//var data = require('../data.json');
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+exports.view = function(req, res){
+	res.render('index', { title: 'Express' });
 };
