@@ -6,6 +6,8 @@
 var express = require('express');
 var routes = require('./routes');
 var index = require('./routes/index');
+var profile = require('./routes/profile');
+var requests = require('./routes/requests');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
@@ -34,6 +36,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', index.view);
+app.get('/profile', profile.view);
+app.get('/requests', requests.view);
 
 
 http.createServer(app).listen(app.get('port'), function(){
