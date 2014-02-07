@@ -10,7 +10,15 @@ exports.view = function(req, res) {
 };
 
 exports.add_user = function(req, res) {
-    model.addUser(function(e, docs) {
+    var name = req.query.name;
+    var email = req.query.email;
+
+    var params = {
+        name: name,
+        email: email
+    };
+
+    model.addUser(params, function(e, docs) {
         res.json(docs);
     });
 };
