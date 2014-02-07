@@ -33,4 +33,50 @@ ul {
 	float:left;
 	display:inline-block;
 	position:relative;
+
+
+.search-box {
+	border: 2px solid #111;
+	border-radius: 5px;
+}
+
+.search-box img{
+	display: inline-block;
+	width: 21px; 
+	height: 21px;
+	margin: 1px;
+}
+
+.search-box input {
+	border: none;
+	width: 80%;
+	display: inline-block;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+.feed-icon {
+	margin-top: 5px;
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+}
+
+.feed-img {
+	float: left;
+}
+
+.feed-info {
+	float: left;
+	margin-left: 5px;
+}
+
+.feed-event{
+	display: block;
+}
+
+.spacer {
+	clear: both;
 }
