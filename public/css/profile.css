@@ -1,5 +1,5 @@
 #profile-pic {
-	height:10%;
+	width:28%;
 	float:left;
 }
 
@@ -16,6 +16,8 @@ span.glyphicon-th-list, span.glyphicon-wrench {
 	float:left;
 }
 
-.icon, #wishlist, #resources {
+.icon, #wishlist, #resources, #about, #history {
 	float:left;
+	margin-left:6px;
+	margin-right:6px;
 }
