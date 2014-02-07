@@ -1,9 +1,12 @@
 var model = require('../model');
+
+exports.view = function(req, res) {
+    res.json('login');
+};
 var helpers = require('../helpers');
 
-exports.view = function(req, res){
+exports.login = function(req, res){
     // default user and redirect address
-
     var redirect_url = req.param.url || "/";
     var user_id = req.param.user || "52f40f941b77fc44b9000001";
 
