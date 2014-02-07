@@ -2,12 +2,13 @@
 
 <html>
 <head>
-	<title>My HCI Friends</title>	
+	<title>{{user}}</title>	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/bootstrap-theme.css" rel="stylesheet">
 	<link href="css/favorfinder.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
 	
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,10 +23,51 @@
 	<div class="container">
 		<div class="menu-bar">
 			<a href="#"><div id="nav-button">Lines here</div></a>
-			<h1>SHOULD BE PROFILE</h1> <!--Gotta get a dope font for this-->
+			<h1>Favor Finder</h1> <!--Gotta get a dope font for this-->
 			<a href="#"><div id="add-button">Plus sign here</div></a>
 		</div>
-	    <div class="search-box">
+	    
+        <span id="basic-bio">
+            <div>
+                <img src = "http://girlsteachinggirlstocode.org/images/team/heidi.jpg" class="img-responsive" id="profile-pic" />
+            </div>
+            <div id = "about">
+                <h2>{{user}}</h2>
+                <p>Student at Stanford University</p>
+                <p>You are friends </p>
+            </div>
+        </span>
+
+        <span id="wishlist-container">
+            <h3>Wishlist</h3>
+            <div class="icon">
+                <span class="glyphicon glyphicon-th-list"></span>
+            </div>
+            <div id="wishlist" class="scrolling">
+                <form action="">
+                    <input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+                    <input type="checkbox" name="vehicle" value="Car">I have a car 
+                </form>
+            </div>
+        </span>
+
+        <span id="resources-container">
+            <h3>Resources</h3>
+            <div class="icon">
+                <span class="glyphicon glyphicon-wrench"></span>
+            </div>
+            <div id="resources" class="scrolling">
+                <form action="">
+                    <input type="checkbox">I have a bike<br>
+                    <input type="checkbox">I have a car<br>
+                    <input type="checkbox">I have Hulu Plus<br>
+                    <input type="checkbox">I own a guitar<br>
+                </form>
+            </div>
+        </span>
+
+<!--
+        <div class="search-box">
 	    	<form action="TO-BE-FOUND" method="get" name="search">
 	          	<img class="search-icon" src="images/search_icon.png" alt="search icon" />
 	            <input name="seach" type="text" value="Find what's out there" />
@@ -97,6 +139,7 @@
         	</div>
         </div>
 	</div>
+-->
 </body>
 	<script src="js/jquery-1.11.0.js"></script>
 	<script src="js/bootstrap.js"></script>
