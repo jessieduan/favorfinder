@@ -22,12 +22,12 @@
 <body>
 	<div class="container">
 		<div class="menu-bar">
-			<a href="#"><div id="nav-button">Lines here</div></a>
+			<!--<a href="#"><div id="nav-button">Lines here</div></a>-->
 			<h1>Favor Finder</h1> <!--Gotta get a dope font for this-->
-			<a href="#"><div id="add-button">Plus sign here</div></a>
+			<!--<a href="#"><div id="add-button">Plus sign here</div></a>-->
 		</div>
 	    
-        <span id="basic-bio">
+        <div id="basic-bio">
             <div>
                 <img src = "http://girlsteachinggirlstocode.org/images/team/heidi.jpg" class="img-responsive" id="profile-pic" />
             </div>
@@ -36,22 +36,23 @@
                 <p>Student at Stanford University</p>
                 <p>You are friends </p>
             </div>
-        </span>
-
-        <span id="wishlist-container">
+        </div>
+        <br/>
+        <div id="wishlist-container">
             <h3>Wishlist</h3>
             <div class="icon">
                 <span class="glyphicon glyphicon-th-list"></span>
             </div>
             <div id="wishlist" class="scrolling">
-                <form action="">
-                    <input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
-                    <input type="checkbox" name="vehicle" value="Car">I have a car 
-                </form>
+                <ul>
+                    <li>I need a ride to Safeway.</li>
+                </ul>
             </div>
-        </span>
-
-        <span id="resources-container">
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div id="resources-container">
             <h3>Resources</h3>
             <div class="icon">
                 <span class="glyphicon glyphicon-wrench"></span>
@@ -64,82 +65,21 @@
                     <input type="checkbox">I own a guitar<br>
                 </form>
             </div>
-        </span>
+        </div>
 
-<!--
-        <div class="search-box">
-	    	<form action="TO-BE-FOUND" method="get" name="search">
-	          	<img class="search-icon" src="images/search_icon.png" alt="search icon" />
-	            <input name="seach" type="text" value="Find what's out there" />
-        	</form>
+        <div id="history-container">
+            <h3>User History</h3>
+            <div id="history">
+                <ul>
+                    <li>Heidi taught Sara how to code.</li>
+                    <li>Heidi helped Ben make a detailed task list.</li>
+                </ul>
+            </div>
         </div>
-        <hr/>
-        <div class="news-feed">
-        {{#each newsfeed-item}}
-        	<div class="feed-event">
-        		<img class="feed-icon" src="{{imgURL}}"/>
-        		<h4>{{title}}</h4>
-        		<p class="event-desc">{{description}}</p>
-        	</div>
-        {{/each}}
-        	<div class="feed-event">
-        		<div class="feed-img">
-        			<img class="feed-icon" src="images/search_icon.png"/>
-        		</div>
-        		<div class="feed-info">
-	        		<h4>HCI Work Session</h4>
-	        		<p class="event-desc">Yongxing, Jessie and Ben are all in Hog Heaven right now working on their CS 147 assignment!</p>
-        		</div>
-        		<div class="spacer"></div>
-        		<hr/>
-        	</div>
-        	<div class="feed-event">
-        		<div class="feed-img">
-        			<img class="feed-icon" src="images/search_icon.png"/>
-        		</div>
-        		<div class="feed-info">
-	        		<h4>Lunch Clean</h4>
-	        		<p class="event-desc">Ben totally forgot to do his lunch clean.</p>
-        		</div>
-        		<div class="spacer"></div>
-        		<hr/>
-        	</div>
-        	<div class="feed-event">
-        		<div class="feed-img">
-        			<img class="feed-icon" src="images/search_icon.png"/>
-        		</div>
-        		<div class="feed-info">
-	        		<h4>Boba!!!</h4>
-	        		<p class="event-desc">We're all going to grab boba in Mountain view this evening!</p>
-        		</div>
-        		<div class="spacer"></div>
-        		<hr/>
-        	</div>
-        	<div class="feed-event">
-        		<div class="feed-img">
-        			<img class="feed-icon" src="images/search_icon.png"/>
-        		</div>
-        		<div class="feed-info">
-	        		<h4>Coffee Run!</h4>
-	        		<p class="event-desc">Harry Simon is borrowing Yongxing's car to go on a coffee run.</p>
-        		</div>
-        		<div class="spacer"></div>
-        		<hr/>
-        	</div>
-        	<div class="feed-event">
-        		<div class="feed-img">
-        			<img class="feed-icon" src="images/search_icon.png"/>
-        		</div>
-        		<div class="feed-info">
-	        		<h4>147 Studio</h4>
-	        		<p class="event-desc">Chillin' with Heidi and the crew</p>
-        		</div>
-        		<div class="spacer"></div>
-        		<hr/>
-        	</div>
-        </div>
-	</div>
--->
+
+    </div>
+
+
 </body>
 	<script src="js/jquery-1.11.0.js"></script>
 	<script src="js/bootstrap.js"></script>
