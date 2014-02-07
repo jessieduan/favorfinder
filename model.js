@@ -5,7 +5,7 @@ var TimeStamp = mongo.Timestamp;
 
 var monk = require('monk');
 
-var db_addr = MONGOHQ_URL || "localhost:27017/favor";
+var db_addr = process.env.MONGOHQ_URL || "localhost:27017/favor";
 var db = monk(db_addr);
 
 var users = db.get('users');
