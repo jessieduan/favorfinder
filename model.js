@@ -70,8 +70,8 @@ exports.findPostings = function(params, callback) {
     query = {};
     if (query_str) {
         query[$or] = {
-            name: /.*query.*/,
-            description: /.*query.*/
+            name: {$regex: /.*query.*/},
+            description: {$regex: /.*query.*}
         };
     }
     
