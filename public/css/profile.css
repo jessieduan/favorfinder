@@ -6,7 +6,7 @@
 #about {
 	float:left;
 }
-span.glyphicon-th-list, span.glyphicon-wrench {
+.icon span {
 	font-size: 40px;
 }
 
