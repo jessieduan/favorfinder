@@ -7,7 +7,9 @@ exports.view = helpers.verifyLogin(function(req, res, user) {
         query_str: query_str
     };
     model.findPostings(params, function(e, postings) {
-        res.json(postings);
+        res.render('postings', {
+            postings: postings
+        });
     });
 });
 

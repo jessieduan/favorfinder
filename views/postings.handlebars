@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html>
+<head>
+	<title>Favor Finder</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.css" rel="stylesheet">
+	<link href="css/favorfinder.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container" id="main-body">
+        {{#each postings}}
+        	<div class="feed-event">
+        		<img class="feed-icon" src="{{imgURL}}"/>
+        		<h4>{{name}}</h4>
+        		<p class="event-desc">{{description}}</p>
+        	</div>
+        {{/each}}
+    </div>
+</body>
