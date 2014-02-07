@@ -4,7 +4,9 @@ var ObjectId = mongo.ObjectID;
 var TimeStamp = mongo.Timestamp;
 
 var monk = require('monk');
-var db = monk('localhost:27017/favor');
+
+var db_addr = process.env.MONGOHQ_URL || "localhost:27017/favor";
+var db = monk(db_addr);
 
 var users = db.get('users');
 var postings = db.get('postings');
@@ -68,8 +70,8 @@ exports.findPostings = function(params, callback) {
     query = {};
     if (query_str) {
         query[$or] = {
-            name: /.*query.*/,
-            description: /.*query.*/
+            name: {$regex: /.*query.*/},
+            description: {$regex: /.*query.*}
         };
     }
     
