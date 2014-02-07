@@ -8,6 +8,7 @@ var routes = require('./routes');
 var index = require('./routes/index');
 var profile = require('./routes/profile');
 var requests = require('./routes/requests');
+var appointments = require('./routes/appointments');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
@@ -42,11 +43,13 @@ if ('development' == app.get('env')) {
 app.get('/', index.view);
 app.get('/profile', profile.view);
 app.get('/requests', requests.view);
+app.get('/appointments', appointments.view);
 
 app.get('/add_user', login.add_user);
 app.get('/login', login.view);
 app.get('/post_login', login.login);
 app.get('/logout', login.logout);
+
 
 app.get('/add_posting', postings.add);
 app.get('/view_postings', postings.view);
