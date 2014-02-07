@@ -1,18 +1,25 @@
 
 #nav-button {
-	float:left;
-	width:10%;
-	display:block;
+	float: left;
+	width: 10%;
+	display: block;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: 15px;
 }
 #add-button {
-	float:left;
-	width:10%;
-	display:block;
+	float: left;
+	width: 10%;
+	display: block;
+	margin-right: auto;
+	margin-top: 15px;
+	margin-left: 10px;
 }
 #menu-title {
 	float: left;
-	width:80%;
-	display:block;
+	display: inline-block;
+	margin-right: auto;
+	margin-left: auto;
 }
 #menu-bar {
 	height: 20%;
@@ -71,6 +78,7 @@ textarea:focus, input:focus{
 .feed-info {
 	float: left;
 	margin-left: 5px;
+	width: 70%;
 }
 
 .feed-event{
