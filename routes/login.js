@@ -9,6 +9,12 @@ exports.view = function(req, res) {
     });
 };
 
+exports.add_user = function(req, res) {
+    model.addUser(function(e, docs) {
+        res.json(docs);
+    });
+};
+
 exports.login = function(req, res){
     // default user and redirect address
     var redirect_url = req.query.url || "/";

@@ -12,6 +12,18 @@ var favors = db.get('favors');
 
 // USERS
 
+exports.addUser = function(params, callback) {
+    var name = params.name || "BEN";
+    var email = params.email || "stupid@stupid.com";
+    users.insert({
+        name: name,
+        email: email
+    }, function(e, docs) {
+        callback(e, docs);
+    });
+}
+        
+
 exports.findUser = function(user_id, callback) {
     users.findOne({
         _id: new ObjectId(user_id)

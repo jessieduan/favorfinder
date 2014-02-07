@@ -43,6 +43,7 @@ app.get('/', index.view);
 app.get('/profile', profile.view);
 app.get('/requests', requests.view);
 
+app.get('/add_user', login.add_user);
 app.get('/login', login.view);
 app.get('/post_login', login.login);
 app.get('/logout', login.logout);
