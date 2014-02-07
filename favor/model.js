@@ -3,7 +3,7 @@ var mongo = require('mongodb');
 var ObjectId = mongo.ObjectID;
 
 var monk = require('monk');
-var db = monk('localhost:27017/favorfinder');
+var db = monk('localhost:27017/favor');
 
 var users = db.get('users');
 var postings = db.get('postings');
@@ -14,5 +14,11 @@ exports.findUser = function(user_id, callback) {
         _id: new ObjectId(user_id)
     }, function(e, docs) {
         callback(e, docs)
+    });
+}
+
+exports.findAllUsers = function(callback) {
+    users.find({}, function(e, docs) {
+        callback(e, docs);
     });
 }

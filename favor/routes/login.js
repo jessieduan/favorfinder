@@ -1,14 +1,18 @@
 var model = require('../model');
+var helpers = require('../helpers');
 
 exports.view = function(req, res) {
-    res.json('login');
+    model.findAllUsers(function(e, users) {
+        res.render('login', {
+            users: users
+        });
+    });
 };
-var helpers = require('../helpers');
 
 exports.login = function(req, res){
     // default user and redirect address
-    var redirect_url = req.param.url || "/";
-    var user_id = req.param.user || "52f40f941b77fc44b9000001";
+    var redirect_url = req.query.url || "/";
+    var user_id = req.query.user || "52f40f941b77fc44b9000001";
 
     model.findUser(user_id, function(e, docs) {
         if (docs) {
@@ -19,4 +23,9 @@ exports.login = function(req, res){
         }
         res.redirect(redirect_url);
     });
+};
+
+exports.logout = function(req, res){
+    res.clearCookie('user');
+    res.redirect('login');
 };
