@@ -1,3 +1,40 @@
+
+#nav-button {
+	float:left;
+	width:10%;
+	display:block;
+}
+#add-button {
+	float:left;
+	width:10%;
+	display:block;
+}
+#menu-title {
+	float: left;
+	width:80%;
+	display:block;
+}
+#menu-bar {
+	height: 20%;
+	position: relative;
+}
+ul {
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+#navbar-flyout {
+	display:none;
+	float:left;
+	height:100%;
+	width: 40%;
+}
+#main-body {
+	float:left;
+	display:inline-block;
+	position:relative;
+
+
 .search-box {
 	border: 2px solid #111;
 	border-radius: 5px;
