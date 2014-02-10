@@ -33,13 +33,14 @@ body{
 hr{
 	margin-top: 7px;
 	margin-bottom: 7px;
+	border-top: 1px solid rgba(0, 181, 189, 0.5);
 }
 .glyphicon{
 	position: inherit;
 }
 .search-box {
 	margin-top: 7px;
-	border: 2px solid #949494;
+	border: 3px solid #E0E0E0;
 	border-radius: 5px;
 	background: inherit;
 }

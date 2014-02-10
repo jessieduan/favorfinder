@@ -1,3 +1,17 @@
 .requests-summary{
 	margin-top: 7px;
 }
+
+.btn-group-wrap{
+	text-align: center;
+	margin-top: 7px;
+	position: initial;
+}
+
+.btn-group {
+	position: initial;
+}
+
+.btn-group .btn{
+	position: initial;
+}
