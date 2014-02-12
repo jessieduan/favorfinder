@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var profile = require('./routes/profile');
 var requests = require('./routes/requests');
 var appointments = require('./routes/appointments');
+var settings = require('./routes/settings');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
@@ -44,6 +45,7 @@ app.get('/', index.view);
 app.get('/profile', profile.view);
 app.get('/requests', requests.view);
 app.get('/appointments', appointments.view);
+app.get('/settings', settings.view);
 
 app.get('/add_user', login.add_user);
 app.get('/login', login.view);
