@@ -13,6 +13,20 @@
 	color: white;
 	margin-top: -15px;
 }
+.btn-group-wrap{
+	text-align: center;
+	margin-top: 10px;
+	position: initial;
+}
+
+.btn-group {
+	position: initial;
+}
+
+.btn-group .btn{
+	position: initial;
+}
+
 .icon span {
 	font-size: 40px;
 }
