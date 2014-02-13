@@ -57,8 +57,9 @@ function setupLoadFeed() {
 
 function generateFeedItem(feed) {
     return $("<div/>").append(
+        $("<img/>").attr("src", feed.user.pic),
         $("<span/>").text(feed.user.name),
-        " wants ",
+        feed.status,
         $("<span/>").text(feed.name),
         $("<br/>"),
         $("<div/>").text(feed.description)

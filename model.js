@@ -1,3 +1,4 @@
+
 // database stuff
 var mongo = require('mongodb');
 var ObjectId = mongo.ObjectID;
@@ -11,17 +12,18 @@ var db = monk(db_addr);
 var users = db.get('users');
 var postings = db.get('postings');
 
-// USERS
+STATUS = {UNCLAIMED: "unclaimed", CLAIMED: "claimed", COMPLETE: "complete"};
 
+// USERS
 
 exports.reloadData = function(func) {
     users.remove();
     postings.remove();
 
     users.insert([
-        {name: "Yongxing Deng", email: "yxdeng@stanford.edu"},
-        {name: "Jessie Duan", email: "jduan1@stanford.edu"},
-        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu"}
+        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "https://www.google.com/images/srpr/logo11w.png"},
+        {name: "Jessie Duan", email: "jduan1@stanford.edu", pic: "https://www.google.com/images/srpr/logo11w.png"},
+        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu", pic: "https://www.google.com/images/srpr/logo11w.png"}
     ]);
     
     users.find({}, function(e, docs) {
@@ -31,16 +33,16 @@ exports.reloadData = function(func) {
 
         postings.insert([
             {user: user1, name: "Boba", description: "Can someone get me some boba?",
-             isPrivate: true},
+                isPrivate: true, status: CONSTANTS.STATUS.UNCLAIMED},
             {user: user3, name: "More colored pants", description: "Can't live without them",
-             isPrivate: false}
+                isPrivate: false, status: CONSTANTS.STATUS.UNCLAIMED}
         ]);
     });
 }
 
 exports.addUser = function(params, callback) {
-    var name = params.name || "BEN";
-    var email = params.email || "stupid@stupid.com";
+    var name = params.name;
+    var email = params.email;
     users.insert({
         name: name,
         email: email
