@@ -1,4 +1,7 @@
+$(document).ready(function() {
+	initializePage();
+})
 
 function initializePage() {
-	$('#myModal').modal('toggle');
+	
 }

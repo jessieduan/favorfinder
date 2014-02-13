@@ -3,8 +3,7 @@ var helpers = require('../helpers');
 
 exports.view = function(req, res, user){
     res.render('index', { 
-        title: 'Express',
-        user: user
+        title: 'Express'
     });
 };
 

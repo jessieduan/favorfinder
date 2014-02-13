@@ -13,10 +13,13 @@ exports.view = helpers.verifyLogin(function(req, res, user) {
     });
 });
 
-exports.add = helpers.verifyLogin(function(req, res, user) {
+//exports.add = helpers.verifyLogin(function(req, res, user) {
+exports.add = function(req, res, user) {
+    console.log(req.query);
     var name = req.query.name + " this";
     var description = req.query.description + " descr";
-    var notifiers = [];
+    var notifiers = req.query.notifiers;
+    var isPrivate = (req.query.private == "on") ? true: false
     var helpOthers = true;
 
     var params = {
@@ -24,10 +27,11 @@ exports.add = helpers.verifyLogin(function(req, res, user) {
         name: name,
         description: description,
         notifiers: notifiers,
+        isPrivate: isPrivate,
         helpOthers: helpOthers
     };
 
     model.addPosting(user, params, function(e, postings) {
         res.json(e);
     });
-});
+}
