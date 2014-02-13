@@ -51,9 +51,10 @@ app.get('/add_user', login.add_user);
 app.get('/login', login.view);
 app.get('/post_login', login.login);
 app.get('/logout', login.logout);
+app.get('/reset_data', login.reset);
 
 
-app.get('/add_posting', postings.add);
+app.post('/add_posting', postings.add);
 app.get('/view_postings', postings.view);
 
 http.createServer(app).listen(app.get('port'), function(){

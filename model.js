@@ -10,9 +10,33 @@ var db = monk(db_addr);
 
 var users = db.get('users');
 var postings = db.get('postings');
-var favors = db.get('favors');
 
 // USERS
+
+
+exports.reloadData = function(func) {
+    users.remove();
+    postings.remove();
+
+    users.insert([
+        {name: "Yongxing Deng", email: "yxdeng@stanford.edu"},
+        {name: "Jessie Duan", email: "jduan1@stanford.edu"},
+        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu"}
+    ]);
+    
+    users.find({}, function(e, docs) {
+        var user1 = docs[0];
+        var user2 = docs[1];
+        var user3 = docs[2];
+
+        postings.insert([
+            {user: user1, name: "Boba", description: "Can someone get me some boba?",
+             isPrivate: true},
+            {user: user3, name: "More colored pants", description: "Can't live without them",
+             isPrivate: false}
+        ]);
+    });
+}
 
 exports.addUser = function(params, callback) {
     var name = params.name || "BEN";
@@ -25,7 +49,6 @@ exports.addUser = function(params, callback) {
     });
 }
         
-
 exports.findUser = function(user_id, callback) {
     users.findOne({
         _id: new ObjectId(user_id)
@@ -43,22 +66,8 @@ exports.findAllUsers = function(callback) {
 //POSTINGS
 
 exports.addPosting = function(user, params, callback) {
-    var name = params.name || "" ; 
-    var description = params.description || "";
-    var notifiers = params.notifiers || [];
-    var helpOthers = params.helpOthers || false;
-
-    if (!user || !name) {
-        callback("Error!");
-    }
-
-    postings.insert({
-        user: user,
-        name: name,
-        description: description,
-        notifiers: notifiers,
-        helpOthers: helpOthers
-    }, function(e, docs) {
+    params.status = "Unclaimed";
+    postings.insert(params, function(e, docs) {
         callback(e, docs);
     });
 }

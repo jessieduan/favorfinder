@@ -43,3 +43,9 @@ exports.logout = function(req, res){
     res.clearCookie('user');
     res.redirect('login');
 };
+
+exports.reset = function(req, res) {
+    res.clearCookie("user");
+    model.reloadData();
+    res.json("Data reloaded. You need to re-login.");
+}
