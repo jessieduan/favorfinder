@@ -13,8 +13,7 @@ exports.view = helpers.verifyLogin(function(req, res, user) {
     });
 });
 
-//exports.add = helpers.verifyLogin(function(req, res, user) {
-exports.add = function(req, res, user) {
+exports.add = helpers.verifyLogin(function(req, res, user) {
     console.log(req.query);
     var name = req.query.name + " this";
     var description = req.query.description + " descr";
@@ -34,4 +33,4 @@ exports.add = function(req, res, user) {
     model.addPosting(user, params, function(e, postings) {
         res.json(e);
     });
-}
+});

@@ -46,7 +46,7 @@ exports.addPosting = function(user, params, callback) {
     var name = params.name || "" ; 
     var description = params.description || "";
     var notifiers = params.notifiers || [];
-    var helpOthers = params.helpOthers;
+    var helpOthers = params.helpOthers || false;
 
     if (!user || !name) {
         callback("Error!");
