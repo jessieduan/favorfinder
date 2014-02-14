@@ -111,3 +111,21 @@ textarea:focus, input:focus{
     max-height: 40px;
     max-width: 40px;
 }
+
+.btn-group-wrap{
+	text-align: center;
+	margin-top: 10px;
+	position: initial;
+}
+
+.btn-group {
+	position: initial;
+}
+
+.btn-group .btn{
+	position: initial;
+}
+
+#addFavorForm{
+	background: white;
+}

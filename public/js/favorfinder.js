@@ -8,6 +8,15 @@ function initializePage() {
     setupLoadFeed();
 }
 
+function refresh() {
+    if ($(".news-feed-fake").length > 0) {
+       $.getJSON("/view_postings", function(data) {
+            $(".news-feed-fake").empty();
+            $(".news-feed-fake").append(data.map(generateFeedItem));
+       });
+    }
+}
+
 function setupSerializeObject(){
   $.fn.serializeObject = function(){
     var o = {};
@@ -28,21 +37,25 @@ function setupSerializeObject(){
 
 // rewiring modal submit
 function modalSubmit() {
-    console.log($("button.modal-submit"));
     $(".modal-submit").click(function(e) {
         e.preventDefault();
 
         var button = $(this);
         var form = button.closest("form");
+        var modal = button.closest(".modal");
         var url = form.attr("action");
 
         $.ajax({
             type: "POST",
             url: url,
             data: form.serializeObject(),
-            succuss: function(data) {console.log(data);},
+            complete: function() {
+                refresh();
+            },
             dataType: "JSON",
         });
+        
+        modal.modal("hide");
     });
 };
 

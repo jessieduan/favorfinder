@@ -20,11 +20,16 @@ var postings = require('./routes/postings');
 
 var app = express();
 
+var hbs = handlebars.create({
+	defaultLayout: 'main',
+	partialsDir: 'views/partials/'
+});
+
 // all environments
 // 3000 doesn't work for me, so I'm changing it to 1234
 app.set('port', process.env.PORT || 1234);
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', handlebars());
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(express.favicon());
 app.use(express.logger('dev'));
