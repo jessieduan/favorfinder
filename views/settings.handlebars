@@ -7,10 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/bootstrap-theme.css" rel="stylesheet">
+  <link href="css/bootstrap-switch.css" rel="stylesheet">
 	<link href="css/favorfinder.css" rel="stylesheet">
   <link href="css/requests.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
-	   
+  <link href="css/settings.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>   
 </head>
 
 <body>
@@ -68,16 +69,58 @@
     <div class="spacer"></div>
     <div id="content">
       <br/>
-      <h4>Notify me when...</h4>
-      <button type="button" class="btn btn-default btn-block">Someone requests a favor from me</button>
-      <button type="button" class="btn btn-default btn-block">Someone accepts my favor</button>
-      <button type="button" class="btn btn-default btn-block">A friend has an event</button>
-      <button type="button" class="btn btn-default btn-block">Someone needs a resource that I have</button>
+      <h3>Notify me when...</h3>
+      <div class="option">
+        <p>Request received: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="option">
+        <p>Favor Accepted: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="option">
+        <p>Friend posts event: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="option">
+        <p>Resource Desired: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
       <br/>
-      <h4>Notify me by...</h4>
-      <button type="button" class="btn btn-default btn-block">Push notification</button>
-      <button type="button" class="btn btn-default btn-block">Text</button>
-      <button type="button" class="btn btn-default btn-block">Email</button>
+      <h3>Notify me by...</h3>
+      <div class="option">
+        <p>Push Notification: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="option">
+        <p>Text: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="option">
+        <p>Email: </p> 
+        <div class="switch">
+          <input type="checkbox" name="my-checkbox" checked>
+        </div>
+        <div class="spacer"></div>
+      </div>
     </div>
   </div>
 
@@ -111,7 +154,6 @@
             {{/each}}
           </select>
         </div>
-
         <div class="checkbox">
           <label>
             <input type="checkbox" name="private"> Make private?
@@ -135,7 +177,9 @@
 </script>
 
 </body>
-  <script src="js/jquery-1.11.0.js"></script>
+  <script src="js/jquery-2.1.0.js"></script>
+  <script src="js/bootstrap-switch.js"></script> 
   <script src="js/bootstrap.js"></script>
   <script src="js/favorfinder.js"></script>
+  <script src="js/settings.js"></script>
 </html>

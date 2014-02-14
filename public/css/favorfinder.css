@@ -98,3 +98,17 @@ textarea:focus, input:focus{
 	font-size: 12px;
 	text-align: center;
 }
+
+.btn-group-wrap{
+	text-align: center;
+	margin-top: 10px;
+	position: initial;
+}
+
+.btn-group {
+	position: initial;
+}
+
+.btn-group .btn{
+	position: initial;
+}
