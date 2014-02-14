@@ -1,0 +1,129 @@
+<!doctype html>
+
+<html>
+<head>
+	<title>{{> title}}</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.css" rel="stylesheet">
+	<link href="css/favorfinder.css" rel="stylesheet">
+  <link href="css/requests.css" rel="stylesheet">
+  <link href="css/profile.css" rel="stylesheet">	
+  <link href="css/settings.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+  
+  <div class="container">
+    <div id="menu-bar">
+      <div id="nav-button">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-align-justify"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/">
+                <span class="glyphicon glyphicon-home"></span>  Home 
+            </a></li>
+            <li><a href="/profile">
+                <span class="glyphicon glyphicon-user"></span>  My Profile
+            </a></li>
+            <li><a href="/appointments">
+                <span class="glyphicon glyphicon-time"></span>  My Appointments
+            </a></li>
+            <li><a href="/requests">
+                <span class="glyphicon glyphicon-inbox"></span>  Requests
+            </a></li>
+            <li class="divider"></li>
+            <li><a href="/settings">
+                <span class="glyphicon glyphicon-wrench"></span>  Settings
+            </a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="title"><p>FAVOR FINDER</p></div>
+      <div id="add-button">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li>
+              <a href="#otherModal" role="button" class="btn" data-toggle="modal">
+                <span class="glyphicon glyphicon-plus"></span>
+                  New Event 
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#addFavorModal" role="button" class="btn" data-toggle="modal" data-backdrop="static">
+                <span class="glyphicon glyphicon-plus"></span>  New Favor
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+
+  </div>
+
+	
+
+  <div id="addFavorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFavorModalLabel" aria-hidden="true">
+    <form id="addFavorForm" role="form" method="get" action="/add_posting">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="addFavorModalLabel">Add a favor</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea class="form-control" rows="2" id="description" placeholder="Description" name="description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Notify (optional)</label>
+          <select multiple class="form-control" name="notifiers">
+            <!-- Static names -->
+            <option>Heidi</option>
+            <option>Ben</option>
+            <option>Yongxing</option>
+            <option>Jessie</option>
+            <!-- Will work with Mongo -->
+            {{#each userlist}}
+            <option>{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="private"> Make private?
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true" class="close">Close</button>
+        <input type="submit" id="addFavorSubmitBtn" class="btn btn-primary close" value="Get Help!"></input>
+        <!-- clicking this button should change everything inside the modal to a confirmation and provide a close button. if you add data-dismiss="modal" here, the submit won't work -->
+      </div>
+    </form>
+
+  </div>
+
+{{{body}}}
+
+</body>
+  <script src="js/jquery-1.11.0.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/favorfinder.js"></script>
+  <script src="js/bootstrap-switch.js"></script>
+</html>
