@@ -18,6 +18,10 @@
 	font-size: 40px;
 }
 
+#history{
+	max-width: 220px; /*This should be better, just for demo */
+}
+
 .scrolling {
 	height: 10%;
 	overflow:scroll;

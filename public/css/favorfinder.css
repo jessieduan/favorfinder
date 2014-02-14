@@ -112,3 +112,7 @@ textarea:focus, input:focus{
 .btn-group .btn{
 	position: initial;
 }
+
+#addFavorForm{
+	background: white;
+}
