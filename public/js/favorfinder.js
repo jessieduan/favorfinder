@@ -8,11 +8,15 @@ function initializePage() {
     setupLoadFeed();
 }
 
-function refresh() {
+function refreshFeed() {
     if ($(".news-feed-fake").length > 0) {
        $.getJSON("/view_postings", function(data) {
             $(".news-feed-fake").empty();
-            $(".news-feed-fake").append(data.map(generateFeedItem));
+            var query = $(".search-box input").val().toLowerCase() || "";
+            var items = data.filter(function(item) {
+                return (query == "") || (JSON.stringify(item).toLowerCase().indexOf(query) !== -1)
+            }).map(generateFeedItem);
+            $(".news-feed-fake").append(items);
        });
     }
 }
@@ -60,12 +64,10 @@ function modalSubmit() {
 };
 
 function setupLoadFeed() {
-    $(".news-feed-fake").ready(function() {
-       $.getJSON("/view_postings", function(data) {
-            $(".news-feed-fake").empty();
-            $(".news-feed-fake").append(data.map(generateFeedItem));
-       });
+    $(".news-feed-fake").ready(function() { 
+      refreshFeed();
     });
+    $(".search-box input").change(refreshFeed);
 }
 
 function generateFeedItem(feed) {
