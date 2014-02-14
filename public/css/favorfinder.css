@@ -98,3 +98,16 @@ textarea:focus, input:focus{
 	font-size: 12px;
 	text-align: center;
 }
+
+.feed-item {
+    padding: 5px;
+    color: black;
+}
+
+.feed-item-title {
+}
+
+.feed-item-image {
+    max-height: 40px;
+    max-width: 40px;
+}

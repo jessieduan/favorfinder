@@ -47,21 +47,50 @@ function modalSubmit() {
 };
 
 function setupLoadFeed() {
-    $(".news-feed").ready(function() {
+    $(".news-feed-fake").ready(function() {
        $.getJSON("/view_postings", function(data) {
-            $(".news-feed").empty();
-            $(".news-feed").append(data.map(generateFeedItem));
+            $(".news-feed-fake").empty();
+            $(".news-feed-fake").append(data.map(generateFeedItem));
        });
     });
 }
 
 function generateFeedItem(feed) {
-    return $("<div/>").append(
-        $("<img/>").attr("src", feed.user.pic),
-        $("<span/>").text(feed.user.name),
-        feed.status,
-        $("<span/>").text(feed.name),
-        $("<br/>"),
-        $("<div/>").text(feed.description)
-    );
+    if (feed.status == "unclaimed") {
+        return $("<div/>").addClass("feed-item panel").append(
+            $("<img/>").addClass("feed-item-image").attr("src", feed.user.pic),
+            $("<div/>").addClass("feed-item-title").append(
+                $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
+                $("<span/>").addClass("text-muted").text(" added a request "),
+                $("<span/>").text(feed.name)
+            ),
+            $("<div/>").text(feed.description)
+        );
+    } else if (feed.status == "claimed") {
+        return $("<div/>").addClass("feed-item panel").append(
+            $("<img/>").addClass("feed-item-image").attr("src", feed.claimer.pic),
+            $("<div/>").addClass("feed-item-title").append(
+                $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
+                $("<span/>").addClass("text-muted").text(" claimed "),
+                $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
+                $("<span/>").addClass("text-muted").text("'s request "),
+                $("<span/>").text(feed.name)
+            ),
+            $("<div/>").addClass("text-muted").text(feed.description),
+            $("<div/>").text(feed.claimer_comment)
+        );
+    } else {
+        return $("<div/>").addClass("feed-item panel").append(
+            $("<img/>").addClass("feed-item-image").attr("src", feed.claimer.pic),
+            $("<div/>").addClass("feed-item-title").append(
+                $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
+                $("<span/>").addClass("text-muted").text(" completed "),
+                $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
+                $("<span/>").addClass("text-muted").text("'s request "),
+                $("<span/>").text(feed.name)
+            ),
+            $("<div/>").addClass("text-muted").text(feed.description),
+            $("<div/>").text(feed.claimer_comment)
+        );
+    }
 }

@@ -9,7 +9,10 @@
 	res.render('settings', { title: 'Express' });
 };*/
 
-exports.view = function(req, res){
+var model = require('../model');
+var helpers = require('../helpers');
+
+exports.view = helpers.verifyLogin(function(req, res, user){
 	res.render('settings', { title: 'Express' });
-};
+});
 

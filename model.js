@@ -21,21 +21,27 @@ exports.reloadData = function(func) {
     postings.remove();
 
     users.insert([
-        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "https://www.google.com/images/srpr/logo11w.png"},
-        {name: "Jessie Duan", email: "jduan1@stanford.edu", pic: "https://www.google.com/images/srpr/logo11w.png"},
-        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu", pic: "https://www.google.com/images/srpr/logo11w.png"}
+        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "/images/yongxing_profile.jpg"},
+        {name: "Jessie Duan", email: "jduan1@stanford.edu", pic: "/images/jessie_profile.jpg"},
+        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu", pic: "/images/ben_profile.jpg"}
     ]);
     
     users.find({}, function(e, docs) {
-        var user1 = docs[0];
-        var user2 = docs[1];
-        var user3 = docs[2];
+        var yongxing = docs[0];
+        var jessie = docs[1];
+        var ben = docs[2];
 
         postings.insert([
-            {user: user1, name: "Boba", description: "Can someone get me some boba?",
-                isPrivate: true, status: CONSTANTS.STATUS.UNCLAIMED},
-            {user: user3, name: "More colored pants", description: "Can't live without them",
-                isPrivate: false, status: CONSTANTS.STATUS.UNCLAIMED}
+            {user: yongxing, name: "Boba", description: "Can someone get me some boba?",
+                isPrivate: true, status: STATUS.UNCLAIMED},
+            {user: ben, name: "More colored pants", description: "Can't live without them",
+                isPrivate: false, status: STATUS.UNCLAIMED},
+            {user: yongxing, name: "Longboard", description: "I want to learn how to longboard!",
+                isPrivate: false, status: STATUS.CLAIMED, claimer: ben,
+                claimer_comment: "I got you dude!"},
+            {user: ben, name: "Identity Parade", description: "Would someone listen to our latest album and give us some feedback?", 
+                isPrivate: false, status: STATUS.COMPLETE,
+                claimer: jessie, claimer_comment: "It sounds really good! You are a rock star, Ben!"}
         ]);
     });
 }
@@ -68,7 +74,9 @@ exports.findAllUsers = function(callback) {
 //POSTINGS
 
 exports.addPosting = function(user, params, callback) {
-    params.status = "Unclaimed";
+    params.status = STATUS.UNCLAIMED;
+    params.user = user;
+    params.isPrivate = params.isPrivate || false;
     postings.insert(params, function(e, docs) {
         callback(e, docs);
     });

@@ -1,9 +1,9 @@
 var model = require('../model');
 var helpers = require('../helpers');
 
-exports.view = function(req, res, user){
+exports.view = helpers.verifyLogin(function(req, res, user){
     res.render('index', { 
         title: 'Express'
     });
-};
+});
 
