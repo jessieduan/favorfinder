@@ -4,7 +4,7 @@ var helpers = require('../helpers');
 exports.view = function(req, res){
     // default user and redirect address
     var user = 'Heidi Wang';
-    res.render('profile', { title: user });
+    res.render('profile', { title: user, page: 'profile' });
 
 /*
     var redirect_url = req.param.url || "/profile";
