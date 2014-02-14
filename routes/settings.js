@@ -10,6 +10,6 @@
 };*/
 
 exports.view = function(req, res){
-	res.render('settings', { title: 'Express' });
+	res.render('settings', { title: 'Settings' });
 };
 
