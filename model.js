@@ -1,3 +1,4 @@
+
 // database stuff
 var mongo = require('mongodb');
 var ObjectId = mongo.ObjectID;
@@ -10,13 +11,44 @@ var db = monk(db_addr);
 
 var users = db.get('users');
 var postings = db.get('postings');
-var favors = db.get('favors');
+
+STATUS = {UNCLAIMED: "unclaimed", CLAIMED: "claimed", COMPLETE: "complete"};
 
 // USERS
 
+exports.reloadData = function(func) {
+    users.remove();
+    postings.remove();
+
+    users.insert([
+        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "/images/yongxing_profile.jpg"},
+        {name: "Jessie Duan", email: "jduan1@stanford.edu", pic: "/images/jessie_profile.jpg"},
+        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu", pic: "/images/ben_profile.jpg"}
+    ]);
+    
+    users.find({}, function(e, docs) {
+        var yongxing = docs[0];
+        var jessie = docs[1];
+        var ben = docs[2];
+
+        postings.insert([
+            {user: yongxing, name: "Boba", description: "Can someone get me some boba?",
+                isPrivate: true, status: STATUS.UNCLAIMED},
+            {user: ben, name: "More colored pants", description: "Can't live without them",
+                isPrivate: false, status: STATUS.UNCLAIMED},
+            {user: yongxing, name: "Longboard", description: "I want to learn how to longboard!",
+                isPrivate: false, status: STATUS.CLAIMED, claimer: ben,
+                claimer_comment: "I got you dude!"},
+            {user: ben, name: "Identity Parade", description: "Would someone listen to our latest album and give us some feedback?", 
+                isPrivate: false, status: STATUS.COMPLETE,
+                claimer: jessie, claimer_comment: "It sounds really good! You are a rock star, Ben!"}
+        ]);
+    });
+}
+
 exports.addUser = function(params, callback) {
-    var name = params.name || "BEN";
-    var email = params.email || "stupid@stupid.com";
+    var name = params.name;
+    var email = params.email;
     users.insert({
         name: name,
         email: email
@@ -25,7 +57,6 @@ exports.addUser = function(params, callback) {
     });
 }
         
-
 exports.findUser = function(user_id, callback) {
     users.findOne({
         _id: new ObjectId(user_id)
@@ -43,22 +74,10 @@ exports.findAllUsers = function(callback) {
 //POSTINGS
 
 exports.addPosting = function(user, params, callback) {
-    var name = params.name || "" ; 
-    var description = params.description || "";
-    var notifiers = params.notifiers || [];
-    var helpOthers = params.helpOthers;
-
-    if (!user || !name) {
-        callback("Error!");
-    }
-
-    postings.insert({
-        user: user,
-        name: name,
-        description: description,
-        notifiers: notifiers,
-        helpOthers: helpOthers
-    }, function(e, docs) {
+    params.status = STATUS.UNCLAIMED;
+    params.user = user;
+    params.isPrivate = params.isPrivate || false;
+    postings.insert(params, function(e, docs) {
         callback(e, docs);
     });
 }
