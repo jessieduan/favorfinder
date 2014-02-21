@@ -22,6 +22,11 @@ body{
 	right: 10px;
 	top: 10px;
 }
+#add-anchor{
+	padding: 0px;
+	border: 0px;
+	color: #444;
+}
 #title {
 	text-align: center;
 	margin-top: 10px;
@@ -125,7 +130,20 @@ textarea:focus, input:focus{
 .btn-group .btn{
 	position: initial;
 }
-
 #addFavorForm{
 	background: white;
+	color:black;
+}
+.subtitle{
+	color: #555;
+}
+.modal-header{
+	text-align: center;
+}
+.option p{
+	float:left;
+	font-weight: bold;
+}
+.option .switch{
+	float:right;
 }

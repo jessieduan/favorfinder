@@ -15,75 +15,68 @@
 </head>
 
 <body>
-  
-  <div class="container">
-    <div id="menu-bar">
-      <div id="nav-button">
-        <div class="btn-group">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-align-justify"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/">
-                <span class="glyphicon glyphicon-home"></span>  Home 
-            </a></li>
-            <li><a href="/profile">
-                <span class="glyphicon glyphicon-user"></span>  My Profile
-            </a></li>
-            <li><a href="/appointments">
-                <span class="glyphicon glyphicon-time"></span>  My Appointments
-            </a></li>
-            <li><a href="/requests">
-                <span class="glyphicon glyphicon-inbox"></span>  Requests
-            </a></li>
-            <li><a href="/settings">
-                <span class="glyphicon glyphicon-wrench"></span>  Settings
-            </a></li>
-            <li class="divider"></li>
-            <li><a href="/settings">
-                <span class="glyphicon glyphicon-log-out"></span>  Log Out
-            </a></li>
-          </ul>
-        </div>
+  <div id="menu-bar">
+    <div id="nav-button">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-align-justify"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="/">
+              <span class="glyphicon glyphicon-home"></span>  Home 
+          </a></li>
+          <li><a href="/profile">
+              <span class="glyphicon glyphicon-user"></span>  My Profile
+          </a></li>
+          <li><a href="/requests">
+              <span class="glyphicon glyphicon-inbox"></span>  Favors
+          </a></li>
+          <li><a href="/settings">
+              <span class="glyphicon glyphicon-wrench"></span>  Settings
+          </a></li>
+          <li class="divider"></li>
+          <li><a href="/settings">
+              <span class="glyphicon glyphicon-log-out"></span>  Log Out
+          </a></li>
+        </ul>
       </div>
-      <div id="title"><p>FAVOR FINDER</p></div>
-      <div id="add-button">
-        <div class="btn-group">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+    </div>
+    <div id="title"><p>FAVOR FINDER</p></div>
+      <div id="add-button">  
+        <a href="#addModal" role="button" class="btn btn-sm" data-toggle="modal" data-backdrop="static" id="add-anchor">
+          <button type="button" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
-          <ul class="dropdown-menu pull-right" role="menu">
-            <li>
-              <a href="#otherModal" role="button" class="btn" data-toggle="modal">
-                <span class="glyphicon glyphicon-plus"></span>
-                  New Event 
-              </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="#addFavorModal" role="button" class="btn" data-toggle="modal" data-backdrop="static">
-                <span class="glyphicon glyphicon-plus"></span>  New Favor
-              </a>
-            </li>
-          </ul>
-        </div>
+        </a>
       </div>
     </div>
     <div class="spacer"></div>
-
   </div>
 
 	
 
-  <div id="addFavorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFavorModalLabel" aria-hidden="true">
+  <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFavorModalLabel" aria-hidden="true">
     <form id="addFavorForm" role="form" method="post" action="/add_posting">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="addFavorModalLabel">Add a favor</h3>
+        <h2 id="modal-mode"> New Favor </h2>
+        <p class="subtitle" id="modal-desc"> Request a favor from friends or add to your wishlist </p>
+        <div class="btn-group-wrap">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-default active" id="favor-btn">
+              <input type="radio" name="options" data-toggle="button"> 
+              <span class="glyphicon glyphicon-plus"></span>  New Favor
+            </label>
+            <label class="btn btn-default" id="event-btn">
+              <input type="radio" name="options" data-toggle="button"> 
+              <span class="glyphicon glyphicon-plus"></span>  New Event
+            </label>
+          </div>
+        </div>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="name">Name:</label>
+          <label for="name" id="title-type">Favor Title:</label>
           <input type="text" class="form-control" id="name" placeholder="Name" name="name">
         </div>
         <div class="form-group">
@@ -92,7 +85,7 @@
         </div>
 
         <div class="form-group">
-          <label>Notify (optional)</label>
+          <label id="notification-type">Send Request (optional):</label>
           <select multiple class="form-control" name="notifiers">
             <!-- Static names -->
             <option>Heidi</option>
@@ -106,15 +99,17 @@
           </select>
         </div>
 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="private"> Make private?
-          </label>
+        <div class="option">
+          <p>Make Private: </p> 
+          <div class="switch">
+            <input type="checkbox" name="private">
+          </div>
+          <div class="spacer"></div>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true" class="close">Close</button>
-        <input type="submit" id="addFavorSubmitBtn" class="btn btn-primary close modal-submit" value="Get Help!"></input>
+        <input type="submit" id="addFavorSubmitBtn" class="btn btn-primary modal-submit" value="Get Help!"></input>
         <!-- clicking this button should change everything inside the modal to a confirmation and provide a close button. if you add data-dismiss="modal" here, the submit won't work -->
       </div>
     </form>
