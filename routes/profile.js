@@ -3,8 +3,17 @@ var helpers = require('../helpers');
 
 exports.view = function(req, res){
     // default user and redirect address
-    var user = 'Heidi Wang';
-    res.render('profile', { title: user, page: 'profile' });
+
+    user_id = req.cookies.user
+    model.findUser(user_id, function(e, user) {
+        if (user) {
+            res.render('profile', { 
+                title: user.name,
+                page: 'profile',
+                user: user
+            });
+        }
+    });
 
 /*
     var redirect_url = req.param.url || "/profile";
