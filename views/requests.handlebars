@@ -18,6 +18,7 @@
     <div class="requests-summary"> 4 Unread : 5 total messages </div>
     <hr/>
     <div class="requests">
+        <a href="#viewFavorModal" data-toggle="modal" data-backdrop="static" id="add-anchor">
     	<div class="feed-event">
     		<div class="feed-img">
     			 <span class="glyphicon glyphicon-certificate"></span>
@@ -29,6 +30,7 @@
     		<div class="spacer"></div>
     		<hr/>
     	</div>
+        </a>
     	<div class="feed-event">
     		<div class="feed-img">
                  <span class="glyphicon glyphicon-certificate"></span>
@@ -72,4 +74,15 @@
     		<hr/>
     	</div>
     </div>
+
+<div id="viewFavorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="viewFavorModalLabel" aria-hidden="true">
+  <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Yongxing needs help!</h3>
+    <p>Can you pick up some boba?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true" class="close">Accept!</button>
+  </div>
+</div>
 </div>

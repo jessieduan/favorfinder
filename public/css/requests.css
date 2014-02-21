@@ -5,3 +5,14 @@
 .btn {
 	font-size: 13px;
 }
+
+.feed-event {
+	color: rgb(218, 234, 240);
+}
+
+#viewFavorModal {
+	margin:15px;
+	background: white;
+	color:black;
+	box-shadow: 10px 10px 5px #888888;
+}

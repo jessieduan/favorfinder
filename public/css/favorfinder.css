@@ -133,6 +133,8 @@ textarea:focus, input:focus{
 #addFavorForm{
 	background: white;
 	color:black;
+	margin:15px;
+	box-shadow: 10px 10px 5px #888888;
 }
 .subtitle{
 	color: #555;
