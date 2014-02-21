@@ -16,6 +16,13 @@ STATUS = {UNCLAIMED: "unclaimed", CLAIMED: "claimed", COMPLETE: "complete"};
 
 // USERS
 
+function generateComment(user, comment) {
+    return {
+        "user": user,
+        "comment": comment
+    };
+}
+
 exports.reloadData = function(func) {
     users.remove();
     postings.remove();
@@ -33,15 +40,15 @@ exports.reloadData = function(func) {
 
         postings.insert([
             {user: yongxing, name: "Boba", description: "Can someone get me some boba?",
-                isPrivate: true, status: STATUS.UNCLAIMED},
+                isPrivate: true, status: STATUS.UNCLAIMED, comments: []},
             {user: ben, name: "More colored pants", description: "Can't live without them",
-                isPrivate: false, status: STATUS.UNCLAIMED},
+                isPrivate: false, status: STATUS.UNCLAIMED, comments: []},
             {user: yongxing, name: "Longboard", description: "I want to learn how to longboard!",
                 isPrivate: false, status: STATUS.CLAIMED, claimer: ben,
-                claimer_comment: "I got you dude!"},
+                comments: [generateComment(ben, "I got you dude!")]},
             {user: ben, name: "Identity Parade", description: "Would someone listen to our latest album and give us some feedback?", 
                 isPrivate: false, status: STATUS.COMPLETE,
-                claimer: jessie, claimer_comment: "It sounds really good! You are a rock star, Ben!"}
+                claimer: jessie, comments: [generateComment(jessie, "It sounds really good! You are a rock star, Ben!")]}
         ]);
     });
 }
@@ -76,6 +83,7 @@ exports.findAllUsers = function(callback) {
 exports.addPosting = function(user, params, callback) {
     params.status = STATUS.UNCLAIMED;
     params.user = user;
+    params.comments = [];
     params.isPrivate = params.isPrivate || false;
     postings.insert(params, function(e, docs) {
         callback(e, docs);
@@ -102,4 +110,34 @@ exports.findPostings = function(params, callback) {
     });
 };
 
+exports.claimPosting = function(user, id, callback) {
+    postings.update(
+        {"_id": id},
+        {$set: {"status": STATUS.CLAIMED,
+                "claimer": user}}
+    );
+}
 
+
+exports.unclaimPosting = function(user, id, callback) {
+    postings.update(
+        {"_id": id},
+        {$set: {"status": STATUS.UNCLAIMED},
+         $unset: {"claimer": ""}}
+    );
+}
+
+exports.completePosting = function(user, id, callback) {
+    postings.update(
+        {"_id": id},
+        {$set: {"status": STATUS.COMPLETE}}
+    );
+}
+
+exports.commentPosting = function(user, id, comment, callback) {
+    postings.update(
+        {"_id": id},
+        {$push: {"comments": generateComment(user, comment)}}
+    );
+}
+        

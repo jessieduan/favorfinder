@@ -13,9 +13,12 @@ function refreshFeed() {
        $.getJSON("/view_postings", function(data) {
             $(".news-feed-fake").empty();
             var query = $(".search-box input").val().toLowerCase() || "";
-            var items = data.filter(function(item) {
+            var user = data.user;
+            var items = data.postings.filter(function(item) {
                 return (query == "") || (JSON.stringify(item).toLowerCase().indexOf(query) !== -1)
-            }).map(generateFeedItem);
+            }).map(function(feed) {
+                return generateFeedItem(feed, user)
+            });
             $(".news-feed-fake").append(items);
        });
     }
@@ -54,7 +57,7 @@ function modalSubmit() {
             url: url,
             data: form.serializeObject(),
             complete: function() {
-                refresh();
+                refreshFeed();
             },
             dataType: "JSON",
         });
@@ -70,42 +73,85 @@ function setupLoadFeed() {
     $(".search-box input").change(refreshFeed);
 }
 
-function generateFeedItem(feed) {
+function generateFeedItem(feed, user) {
+    var titleDiv;
+    var description = $("<div/>").text(feed.description);
+    var image = $("<div/>").append(
+            $("<img/>").addClass("feed-item-image").attr("src", feed.user.pic)
+        );
+    var claimButton = $("<button/>").text("Claim").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "/claim/" + feed._id,
+            complete: function() {
+                refreshFeed();
+            },
+            dataType: "JSON",
+        });
+    });
+    var unclaimButton = $("<button/>").text("Unclaim").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "/unclaim/" + feed._id,
+            complete: function() {
+                refreshFeed();
+            },
+            dataType: "JSON",
+        });
+    });
+    var newComment = $("<input/>").keyup(function(e) {
+        if (e.keyCode == 13) {
+            $.ajax({
+                type: "POST",
+                url: "/comment/" + feed._id,
+                complete: function() {
+                    refreshFeed();
+                },
+                data: {"comment": $(this).val()},
+                dataType: "JSON",
+            });
+        }
+    });
+    var comments = $("<div/>").append(
+            feed.comments.map(function(comment) {
+                return $("<div/>").append(
+                    $("<a/>").attr("href", "/profile/" + comment.user._id).text(comment.user.name),
+                    $("<span/>").text(": "),
+                    $("<span/>").text(comment.comment)
+                );
+            })
+        );
     if (feed.status == "unclaimed") {
-        return $("<div/>").addClass("feed-item panel").append(
-            $("<img/>").addClass("feed-item-image").attr("src", feed.user.pic),
-            $("<div/>").addClass("feed-item-title").append(
+        title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
                 $("<span/>").addClass("text-muted").text(" added a request "),
                 $("<span/>").text(feed.name)
-            ),
-            $("<div/>").text(feed.description)
-        );
+            );
     } else if (feed.status == "claimed") {
-        return $("<div/>").addClass("feed-item panel").append(
-            $("<img/>").addClass("feed-item-image").attr("src", feed.claimer.pic),
-            $("<div/>").addClass("feed-item-title").append(
+        title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
                 $("<span/>").addClass("text-muted").text(" claimed "),
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
                 $("<span/>").addClass("text-muted").text("'s request "),
                 $("<span/>").text(feed.name)
-            ),
-            $("<div/>").addClass("text-muted").text(feed.description),
-            $("<div/>").text(feed.claimer_comment)
-        );
+            );
     } else {
-        return $("<div/>").addClass("feed-item panel").append(
-            $("<img/>").addClass("feed-item-image").attr("src", feed.claimer.pic),
-            $("<div/>").addClass("feed-item-title").append(
+        title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
                 $("<span/>").addClass("text-muted").text(" completed "),
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
                 $("<span/>").addClass("text-muted").text("'s request "),
                 $("<span/>").text(feed.name)
-            ),
-            $("<div/>").addClass("text-muted").text(feed.description),
-            $("<div/>").text(feed.claimer_comment)
         );
     }
+    console.log(feed.user);
+    console.log(user);
+    return $("<div/>").addClass("feed-item panel").append(
+            (feed.status == "unclaimed") && (feed.user._id != user._id) ? claimButton : "",
+            (feed.status == "claimed") && (feed.claimer._id == user._id) ? unclaimButton : "",
+            image,
+            title,
+            comments,
+            newComment
+    );
 }

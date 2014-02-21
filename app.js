@@ -61,6 +61,10 @@ app.get('/reset_data', login.reset);
 
 app.post('/add_posting', postings.add);
 app.get('/view_postings', postings.view);
+app.post('/claim/:id', postings.claim);
+app.post('/unclaim/:id', postings.unclaim);
+app.post('/complete/:id', postings.complete);
+app.post('/comment/:id', postings.comment);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
