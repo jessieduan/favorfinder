@@ -5,6 +5,8 @@ exports.view = function(req, res){
     user_id = req.params.id || req.cookies.user;
     model.findUser(user_id, function(e, user) {
         if (user) {
+            console.log("rendering");
+            console.log(user);
             res.render('profile', { 
                 title: user.name,
                 page: 'profile',

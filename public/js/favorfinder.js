@@ -168,8 +168,6 @@ function generateFeedItem(feed, user) {
                 $("<span/>").text(feed.name)
         );
     }
-    console.log(feed.user);
-    console.log(user);
     return $("<div/>").addClass("feed-item panel").append(
             (feed.status == "unclaimed") && (feed.user._id != user._id) ? claimButton : "",
             (feed.status == "claimed") && (feed.claimer._id == user._id) ? unclaimButton : "",
