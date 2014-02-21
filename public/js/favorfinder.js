@@ -24,6 +24,27 @@ function refreshFeed() {
     }
 }
 
+function initializeModal(){
+    $("[name='private']").bootstrapSwitch();
+    $("[name='private']").bootstrapSwitch('size', 'small');
+    $("[name='private']").bootstrapSwitch('onColor', 'success');
+    $("[name='private']").bootstrapSwitch('offColor', 'danger');
+    $("[name='private']").bootstrapSwitch('onText', "<span class='glyphicon glyphicon-ok'></span>");
+    $("[name='private']").bootstrapSwitch('offText', "<span class='glyphicon glyphicon-minus'></span>");
+    $("#favor-btn").click(function(){
+        $("#modal-mode").text("New Favor");
+        $("#modal-desc").text("Request a favor from friends or add to your wishlist");
+        $("#title-type").text("Favor Title:");
+        $("#notification-type").text("Send Requests (optional):");
+    });
+    $("#event-btn").click(function(){
+        $("#modal-mode").text("New Event");
+        $("#modal-desc").text("Post an event so others can ask for relevant favors");
+        $("#title-type").text("Event Title:");
+        $("#notification-type").text("Send Notifications (optional):");
+    });
+}
+
 function setupSerializeObject(){
   $.fn.serializeObject = function(){
     var o = {};
@@ -44,6 +65,9 @@ function setupSerializeObject(){
 
 // rewiring modal submit
 function modalSubmit() {
+    $(".addFavorForm").ready(function() { 
+      initializeModal();
+    });
     $(".modal-submit").click(function(e) {
         e.preventDefault();
 
