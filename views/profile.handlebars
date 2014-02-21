@@ -1,8 +1,8 @@
     <div class="prof-header" style="background-image: url('images/halfpipe.png')">
         <div class="faded-filter">
-            <div class="circle" style="background-image: url('images/jessie.png')"></div>
+            <div class="circle" style="background-image: url({{user.pic}})"></div>
             <div class = "about">
-                <h3>Jessie Duan</h3>
+                <h3>{{user.name}}</h3>
                 <p> 43 Favors received, 127 Favors completed
             </div>
         </div>
@@ -57,8 +57,8 @@
             </div>
             <div id="history">
                 <ul>
-                    <li>Heidi taught Sara how to code.</li>
-                    <li>Heidi helped Ben make a detailed task list.</li>
+                    <li>{{user.name}} taught Sara how to code.</li>
+                    <li>{{user.name}} helped Ben make a detailed task list.</li>
                 </ul>
             </div>
             <div class="spacer"></div>
