@@ -49,3 +49,12 @@ exports.reset = function(req, res) {
     model.reloadData();
     res.json("Data reloaded. You need to re-login.");
 }
+
+exports.view_users = helpers.verifyLogin(function(req, res, me) {
+    model.findAllUsers(function(e, users) {
+        res.json({
+            "me": me,
+            "users": users
+        });
+    });
+});

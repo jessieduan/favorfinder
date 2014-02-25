@@ -54,6 +54,7 @@ app.get('/appointments', appointments.view);
 app.get('/settings', settings.view);
 
 app.get('/add_user', login.add_user);
+app.get('/view_users', login.view_users);
 app.get('/login', login.view);
 app.get('/post_login', login.login);
 app.get('/logout', login.logout);

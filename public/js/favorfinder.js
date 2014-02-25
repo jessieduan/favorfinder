@@ -1,3 +1,7 @@
+favor = {
+    users: {}
+};
+
 $(document).ready(function() {
 	initializePage();
 })
@@ -7,7 +11,32 @@ function initializePage() {
     modalSubmit();
     setupLoadFeed();
     dynamicWishlist();
+    showOptions();
     //setupProfileFavors();
+}
+
+function showOptions() {
+    $("#add-anchor").click(function() {
+       $.getJSON("/view_users", function(data) {
+            var users = data.users;
+            data.users.forEach(function(user) {
+                favor.users[user._id] = user;
+            });
+
+            var me = data.me;
+
+            $("#form-target").empty().append(
+                users.filter(function(user) {
+                    return user._id != me._id;
+                }).map(function(user) {
+                    return $("<option/>")
+                        .data("info", user)
+                        .text(user.name)
+                        .val(user._id);
+                })
+            );
+      });
+    });
 }
 
 function refreshFeed() {
@@ -98,15 +127,33 @@ function modalSubmit() {
     $(".modal-submit").click(function(e) {
         e.preventDefault();
 
+        $(".alert").hide();
+
         var button = $(this);
         var form = button.closest("form");
         var modal = button.closest(".modal");
         var url = form.attr("action");
 
+        var data = form.serializeObject();
+        if (data.target) {
+            data.target = favor.users[data.target];
+        }
+
+        var alert_message = "";
+        if (!data.name) {
+            alert_message = "Required field: Favor Title.";
+        } else if (!data.description) {
+            alert_message = "Required field: Description.";
+        }
+        if (alert_message) {
+            $(".alert").text(alert_message).show();
+            return;
+        }
+
         $.ajax({
             type: "POST",
             url: url,
-            data: form.serializeObject(),
+            data: data,
             complete: function() {
                 refreshFeed();
             },

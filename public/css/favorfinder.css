@@ -182,3 +182,7 @@ textarea:focus, input:focus{
 .modal .btn{
 	font-size: 13px;
 }
+
+.alert {
+    display: none;
+}
