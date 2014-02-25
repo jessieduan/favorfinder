@@ -116,7 +116,7 @@ exports.addPosting = function(user, params, callback) {
 }
 
 exports.findPostings = function(params, callback) {
-    query_str = params.uery_str || "";
+    query_str = params.query_str || "";
     num = params.num || 10;
 
     query = {};
@@ -133,6 +133,13 @@ exports.findPostings = function(params, callback) {
     }, function(e, docs) {
         callback(e, docs)
     });
+};
+
+exports.findPostingById = function(params, callback) {
+    query_str = params.query_str || "";
+    postings.find({_id: query_str}, {}, function(e, docs) {
+            callback(e, docs)
+        });
 };
 
 exports.claimPosting = function(user, id, callback) {

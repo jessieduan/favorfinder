@@ -14,6 +14,16 @@ exports.view = helpers.verifyLogin(function(req, res, user) {
     });
 });
 
+exports.find_posting = helpers.verifyLogin(function(req, res, user) {
+    var favor_id = {query_str: req.params.id};
+    model.findPostingById(favor_id, function(e, posting) {
+        res.json({
+            "posting": posting
+        });
+    });
+
+});
+
 exports.add = helpers.verifyLogin(function(req, res, user) {
     model.addPosting(user, req.body, function(e, postings) {
         res.json(e ? "Error" : "Success");
