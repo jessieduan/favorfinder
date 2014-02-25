@@ -25,23 +25,23 @@ function refreshFeed() {
 }
 
 function initializeModal(){
-    $("[name='private']").bootstrapSwitch();
-    $("[name='private']").bootstrapSwitch('size', 'small');
-    $("[name='private']").bootstrapSwitch('onColor', 'success');
-    $("[name='private']").bootstrapSwitch('offColor', 'danger');
-    $("[name='private']").bootstrapSwitch('onText', "<span class='glyphicon glyphicon-ok'></span>");
-    $("[name='private']").bootstrapSwitch('offText', "<span class='glyphicon glyphicon-minus'></span>");
+    $("[name='publish']").bootstrapSwitch();
+    $("[name='publish']").bootstrapSwitch('size', 'small');
+    $("[name='publish']").bootstrapSwitch('onColor', 'success');
+    $("[name='publish']").bootstrapSwitch('offColor', 'danger');
+    $("[name='publish']").bootstrapSwitch('onText', "<span class='glyphicon glyphicon-ok'></span>");
+    $("[name='publish']").bootstrapSwitch('offText', "<span class='glyphicon glyphicon-minus'></span>");
     $("#favor-btn").click(function(){
-        $("#modal-mode").text("New Favor");
-        $("#modal-desc").text("Request a favor from friends or add to your wishlist");
-        $("#title-type").text("Favor Title:");
+        $("#modal-mode").text("Request a Favor");
+        $("#modal-desc").text("Request a favor, either from specific friends or from the larger community through the newsfeed");
         $("#notification-type").text("Send Requests (optional):");
+        $("#addFavorSubmitBtn").val("Get Help!");
     });
     $("#event-btn").click(function(){
-        $("#modal-mode").text("New Event");
-        $("#modal-desc").text("Post an event so others can ask for relevant favors");
-        $("#title-type").text("Event Title:");
-        $("#notification-type").text("Send Notifications (optional):");
+        $("#modal-mode").text("Offer a Favor");
+        $("#modal-desc").text("Notify others of your potential offer to help them out! ");
+        $("#notification-type").text("Send Offers (optional):");
+        $("#addFavorSubmitBtn").val("Offer Help!");
     });
 }
 
@@ -95,6 +95,10 @@ function setupLoadFeed() {
       refreshFeed();
     });
     $(".search-box input").change(refreshFeed);
+    $("[name='search']").on("submit", function(e){
+        console.log("Should be triggered");
+        e.preventDefault();
+    });
 }
 
 function generateFeedItem(feed, user) {
