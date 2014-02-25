@@ -28,9 +28,12 @@ exports.reloadData = function(func) {
     postings.remove();
 
     users.insert([
-        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "/images/yongxing_profile.jpg"},
-        {name: "Jessie Duan", email: "jduan1@stanford.edu", pic: "/images/jessie_profile.jpg"},
-        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu", pic: "/images/ben_profile.jpg"}
+        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "/images/yongxing_profile.jpg",
+            resources: ["SanGuoSha", "A car"]},
+        {name: "Jessie Duan", email: "jduan1@stanford.edu", pic: "/images/jessie_profile.jpg",
+            resources: ["Awesomeness", "RCC"]},
+        {name: "Ben McKenzie", email: "bmckenzie@stanford.edu", pic: "/images/ben_profile.jpg",
+            resources: ["Bike", "A car", "Hulu Plus", "Guitar"]}
     ]);
     
     users.find({}, function(e, docs) {
@@ -78,6 +81,13 @@ exports.findAllUsers = function(callback) {
     });
 }
 
+exports.addResource = function(user, resource, callback) {
+    postings.update(
+        {"_id": user._id},
+        {$push: {"resources": resource}}
+    );
+}
+        
 //POSTINGS
 
 exports.addPosting = function(user, params, callback) {

@@ -42,10 +42,9 @@
             </div>
             <div id="resources" class="scrolling">
                 <ul>
-                    <li>I have a bike</li>
-                    <li>I have a car</li>
-                    <li>I have Hulu Plus</li>
-                    <li>I own a guitar</li>
+                    {{#each user.resources}}
+                        <li>{{this}}</li>
+                    {{/each}}
                 </ul>
             </div>
             <div class="spacer"></div>
