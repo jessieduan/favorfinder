@@ -13,14 +13,31 @@ function refreshFeed() {
     if ($(".news-feed-fake").length > 0) {
        $.getJSON("/view_postings", function(data) {
             $(".news-feed-fake").empty();
-            var query = $(".search-box input").val().toLowerCase() || "";
             var user = data.user;
+
+            var query = $(".search-box input").val().toLowerCase() || "";
             var items = data.postings.filter(function(item) {
                 return (query == "") || (JSON.stringify(item).toLowerCase().indexOf(query) !== -1)
-            }).map(function(feed) {
-                return generateFeedItem(feed, user)
             });
-            $(".news-feed-fake").append(items);
+
+            var search_type = $(".search-btn.active").attr("search-type");
+            if (search_type == "claimed") {
+                items = items.filter(function(item) {
+                    return item.claimer && (item.claimer._id == user._id);
+                });
+            } else if (search_type == "inbox") {
+                items = items.filter(function(item) {
+                    return item.target && (item.target._id == user._id);
+                });
+            } else if (search_type == "created") {
+                items = items.filter(function(item) {
+                    return item.user._id == user._id;
+                });
+            }
+
+            $(".news-feed-fake").append(items.map(function(feed) {
+                return generateFeedItem(feed, user);
+            }));
        });
     }
 }
@@ -96,6 +113,7 @@ function setupLoadFeed() {
       refreshFeed();
     });
     $(".search-box input").change(refreshFeed);
+    $(".search-btn").click(refreshFeed);
     $("[name='search']").on("submit", function(e){
         console.log("Should be triggered");
         e.preventDefault();
