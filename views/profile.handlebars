@@ -12,12 +12,16 @@
         {{#if show_buttons}}
             <div class="btn-group-wrap">
                 <div class="btn-group centered" data-toggle="button">
+                    <a href="#addModal" role="button" class="btn btn-sm" data-toggle="modal" data-backdrop="static" id="request-favor">
                     <button type="button" class="btn btn-default" id="inbox">
                         <span class="glyphicon glyphicon-inbox"></span>  Request Favor
                     </button>
+                    </a>
+                    <a href="#addModal" role="button" class="btn btn-sm" data-toggle="modal" data-backdrop="static" id="offer-favor">
                     <button type="button" class="btn btn-default" id="sent">
                         <span class="glyphicon glyphicon-send"></span>  Offer Favor
                     </button>
+                    </a>
                 </div>
             </div>
         {{/if}}
@@ -27,13 +31,8 @@
             <div class="icon">
                 <span class="glyphicon glyphicon-check"></span>
             </div>
-            <div id="wishlist" class="scrolling">
+            <div id="wishlist">
                 <ul>
-                    <li>A ride to Safeway.</li>
-                    <li>Help fixin my bike tire</li>
-                    <li>Cooking Lessons</li>
-                    <li>A climbing partner</li>
-                    <li>Midnight game of Espionage</li>
                 </ul>
             </div>
             <div class="spacer"></div>
@@ -43,7 +42,7 @@
             <div class="icon">
                 <span class="glyphicon glyphicon-edit"></span>
             </div>
-            <div id="resources" class="scrolling">
+            <div id="resources">
                 <ul>
                     {{#each user.resources}}
                         <li>{{this}}</li>
@@ -59,8 +58,6 @@
             </div>
             <div id="history">
                 <ul>
-                    <li>{{user.name}} taught Sara how to code.</li>
-                    <li>{{user.name}} helped Ben make a detailed task list.</li>
                 </ul>
             </div>
             <div class="spacer"></div>

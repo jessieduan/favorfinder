@@ -7,6 +7,7 @@ function initializePage() {
     modalSubmit();
     setupLoadFeed();
     dynamicWishlist();
+    //setupProfileFavors();
 }
 
 function refreshFeed() {
@@ -33,17 +34,25 @@ function initializeModal(){
     $("[name='publish']").bootstrapSwitch('onText', "<span class='glyphicon glyphicon-ok'></span>");
     $("[name='publish']").bootstrapSwitch('offText', "<span class='glyphicon glyphicon-minus'></span>");
     $("#favor-btn").click(function(){
+        changeToRequestFavor();
+    });
+    $("#event-btn").click(function(){
+        changeToOfferFavor();
+    });
+}
+
+function changeToRequestFavor() {
         $("#modal-mode").text("Request a Favor");
         $("#modal-desc").text("Request a favor, either from specific friends or from the larger community through the newsfeed");
         $("#notification-type").text("Send Requests (optional):");
         $("#addFavorSubmitBtn").val("Get Help!");
-    });
-    $("#event-btn").click(function(){
-        $("#modal-mode").text("Offer a Favor");
-        $("#modal-desc").text("Notify others of your potential offer to help them out! ");
-        $("#notification-type").text("Send Offers (optional):");
-        $("#addFavorSubmitBtn").val("Offer Help!");
-    });
+}
+
+function changeToOfferFavor() {
+    $("#modal-mode").text("Offer a Favor");
+    $("#modal-desc").text("Notify others of your potential offer to help them out! ");
+    $("#notification-type").text("Send Offers (optional):");
+    $("#addFavorSubmitBtn").val("Offer Help!");
 }
 
 function setupSerializeObject(){
@@ -195,18 +204,32 @@ function dynamicWishlist() {
               return (item.user._id == user_id) || 
                  (item.claimer && (item.claimer._id == user_id));
            });
-
+           console.log(history);
            var wishlist_items = history.map(function(item) {
-               // note to Jessie: Change this function
-               return $("<div/>").text(item.description);
+               if (item.user._id == user_id) {
+                    return $("<li/>").text(item.description);
+               }
            });
            var history_items = history.map(function(item) {
-               // note to Jessie: change this function
-               return $("<div/>").text(item.description);
+                if (item.claimer) {
+                    return $("<li/>").text(item.claimer.name + " helped " + item.user.name + " with " + item.name);
+                }
            });
 
            $("#wishlist").empty().append(wishlist_items);
            $("#history").empty().append(history_items);
        });
     }
+}
+
+function setupProfileFavors() {
+    $("#request-favor").click(function(e) {
+        $("#favor-btn").click();
+        changeToRequestFavor();
+    });
+
+    $("#offer-favor").click(function(e) {
+        $("#event-btn").click();
+        changeToOfferFavor();
+    });
 }
