@@ -12,7 +12,7 @@ function initializePage() {
     setupLoadFeed();
     dynamicWishlist();
     showOptions();
-    //setupProfileFavors();
+    setupProfileFavors();
 }
 
 function showOptions() {
