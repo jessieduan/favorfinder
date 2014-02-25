@@ -39,10 +39,8 @@ function showOptions() {
                 })
             );
 
-            console.log(dict_name_id);
             setTimeout(function()  {
                 var curr_name = $("#profile-name").text();
-                console.log(curr_name);
                 if (dict_name_id[curr_name]) {
                     $("#form-target").val(dict_name_id[curr_name]);
                 }
@@ -295,7 +293,6 @@ function dynamicWishlist() {
               return (item.user._id == user_id) || 
                  (item.claimer && (item.claimer._id == user_id));
            });
-           console.log(history);
            var wishlist_items = wishlist.map(function(item) {
                if (item.user._id == user_id) {
                     return $("<li/>").text(item.description);
