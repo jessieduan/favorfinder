@@ -8,16 +8,18 @@
         </div>
     </div>
 	<div class="container">
-        <div class="btn-group-wrap">
-            <div class="btn-group centered" data-toggle="button">
-                <button type="button" class="btn btn-default" id="inbox">
-                    <span class="glyphicon glyphicon-inbox"></span>  Request Favor
-                </button>
-                <button type="button" class="btn btn-default" id="sent">
-                    <span class="glyphicon glyphicon-send"></span>  Offer Favor
-                </button>
+        {{#if show_buttons}}
+            <div class="btn-group-wrap">
+                <div class="btn-group centered" data-toggle="button">
+                    <button type="button" class="btn btn-default" id="inbox">
+                        <span class="glyphicon glyphicon-inbox"></span>  Request Favor
+                    </button>
+                    <button type="button" class="btn btn-default" id="sent">
+                        <span class="glyphicon glyphicon-send"></span>  Offer Favor
+                    </button>
+                </div>
             </div>
-        </div>
+        {{/if}}
         <br/>
         <div id="wishlist-container">
             <h3>Wishlist</h3>
