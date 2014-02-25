@@ -158,3 +158,27 @@ textarea:focus, input:focus{
 .dropdown-menu{
 	font-size: 18px;
 }
+
+.modal-body { 
+    max-height: 350px; 
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch; 
+ }
+
+ .modal { 
+	position: fixed; 
+	top: 3%; 
+	right: 3%; 
+	left: 3%; 
+	bottom: 3%; 
+	width: auto; 
+	margin: 0; 
+}
+
+.modal-body { 
+	height: 60%; 
+}
+
+.modal .btn{
+	font-size: 13px;
+}
