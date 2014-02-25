@@ -43,14 +43,14 @@ exports.reloadData = function(func) {
 
         postings.insert([
             {user: yongxing, name: "Boba", description: "Can someone get me some boba?",
-                isPrivate: true, status: STATUS.UNCLAIMED, comments: []},
+                isPrivate: true, status: STATUS.UNCLAIMED, comments: [], is_offer: false},
             {user: ben, name: "More colored pants", description: "Can't live without them",
-                isPrivate: false, status: STATUS.UNCLAIMED, comments: []},
+                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], is_offer: false},
             {user: yongxing, name: "Longboard", description: "I want to learn how to longboard!",
-                isPrivate: false, status: STATUS.CLAIMED, claimer: ben,
+                isPrivate: false, status: STATUS.CLAIMED, claimer: ben, is_offer: false,
                 comments: [generateComment(ben, "I got you dude!")]},
             {user: ben, name: "Identity Parade", description: "Would someone listen to our latest album and give us some feedback?", 
-                isPrivate: false, status: STATUS.COMPLETE,
+                isPrivate: false, status: STATUS.COMPLETE, is_offer: false,
                 claimer: jessie, comments: [generateComment(jessie, "It sounds really good! You are a rock star, Ben!")]}
         ]);
     });

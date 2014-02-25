@@ -6,6 +6,7 @@ function initializePage() {
     setupSerializeObject();
     modalSubmit();
     setupLoadFeed();
+    dynamicWishlist();
 }
 
 function refreshFeed() {
@@ -180,4 +181,20 @@ function generateFeedItem(feed, user) {
             comments,
             newComment
     );
+}
+
+function dynamicWishlist() {
+    if ($("#wishlist").length > 0) {
+       $.getJSON("/view_postings", function(data) {
+           var user_id = $("#userid").text();
+           var wishlist = data.filter(function(item) {
+              return !item.is_offer && (item.user._id == user_id) &&
+                 (item.status === "unclaimed");
+           });
+           var history = data.filter(function() {
+              return true;      
+           });
+       });
+        
+    }
 }
