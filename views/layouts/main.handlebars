@@ -23,10 +23,10 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a href="/">
-              <span class="glyphicon glyphicon-home"></span>  Home 
+              <span class="glyphicon glyphicon-home"></span>  News Feed 
           </a></li>
           <li><a href="/profile">
-              <span class="glyphicon glyphicon-user"></span>  My Profile
+              <span class="glyphicon glyphicon-user"></span>  {{user.name}}
           </a></li>
           <li><a href="/requests">
               <span class="glyphicon glyphicon-inbox"></span>  Favors
@@ -35,7 +35,7 @@
               <span class="glyphicon glyphicon-wrench"></span>  Settings
           </a></li>
           <li class="divider"></li>
-          <li><a href="/settings">
+          <li><a href="/logout">
               <span class="glyphicon glyphicon-log-out"></span>  Log Out
           </a></li>
         </ul>
@@ -59,17 +59,17 @@
     <form id="addFavorForm" role="form" method="post" action="/add_posting">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h2 id="modal-mode"> New Favor </h2>
-        <p class="subtitle" id="modal-desc"> Request a favor from friends or add to your wishlist </p>
+        <h2 id="modal-mode"> Request a Favor </h2>
+        <p class="subtitle" id="modal-desc"> Request a favor, either from specific friends or from the larger community through the newsfeed </p>
         <div class="btn-group-wrap">
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-default active" id="favor-btn">
               <input type="radio" name="options" data-toggle="button"> 
-              <span class="glyphicon glyphicon-plus"></span>  New Favor
+              <span class="glyphicon glyphicon-plus"></span>  Request Favor
             </label>
             <label class="btn btn-default" id="event-btn">
               <input type="radio" name="options" data-toggle="button"> 
-              <span class="glyphicon glyphicon-plus"></span>  New Event
+              <span class="glyphicon glyphicon-plus"></span>  Offer Favor
             </label>
           </div>
         </div>
@@ -100,9 +100,9 @@
         </div>
 
         <div class="option">
-          <p>Make Private: </p> 
+          <p>Share on Newsfeed: </p> 
           <div class="switch">
-            <input type="checkbox" name="private">
+            <input type="checkbox" name="publish" checked="checked">
           </div>
           <div class="spacer"></div>
         </div>

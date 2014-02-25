@@ -154,3 +154,7 @@ textarea:focus, input:focus{
 .modal-header h2{
 	color: rgb(55, 152, 236);
 }
+
+.dropdown-menu{
+	font-size: 18px;
+}

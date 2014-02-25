@@ -13,5 +13,15 @@ var model = require('../model');
 var helpers = require('../helpers');
 
 exports.view = helpers.verifyLogin(function(req, res, user){
-	res.render('settings', { title: 'Express', page: 'settings' });
+	user_id = req.params.id || req.cookies.user;
+    model.findUser(user_id, function(e, user) {
+        if (user) {
+        	console.log(user);
+            res.render('settings', { 
+            	title: 'Settings', 
+            	page: 'settings',
+            	user: user
+            });
+        }
+    });
 });

@@ -1,7 +1,17 @@
+var model = require('../model');
+var helpers = require('../helpers');
 
-// Get all of our friend data
-//var data = require('../data.json');
 
 exports.view = function(req, res){
-	res.render('requests', { title: 'My Requests' , page: 'requests'});
+	user_id = req.params.id || req.cookies.user;
+    model.findUser(user_id, function(e, user) {
+        if (user) {
+        	console.log(user);
+            res.render('requests', { 
+            	title: 'Favors', 
+            	page: 'requests',
+            	user: user
+            });
+        }
+    });
 };
