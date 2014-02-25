@@ -12,7 +12,7 @@ function initializePage() {
     setupLoadFeed();
     dynamicWishlist();
     showOptions();
-    //setupProfileFavors();
+    setupProfileFavors();
 }
 
 function showOptions() {
@@ -82,8 +82,26 @@ function refreshFeed() {
             $(".news-feed-fake").append(items.map(function(feed) {
                 return generateFeedItem(feed, user);
             }));
+
+            items.map(function(feed) {
+                $("#favor_" + feed._id).click(populateViewModal);
+            });
+            
        });
     }
+}
+
+function populateViewModal() {
+    var favor_id = this.id.substring(6);
+    var postings = $.getJSON("/find_posting/" + favor_id);
+    postings.done(function(data) {
+        var favor = data.posting[0];
+        console.log(favor);
+        $("#favor-title").text(favor.name);
+        $("#favor-desc").text(favor.description);
+        // BEN: ADD TO MODAL HERE
+    })
+
 }
 
 function initializeModal(){
@@ -271,13 +289,17 @@ function generateFeedItem(feed, user) {
                 $("<span/>").text(feed.name)
         );
     }
+
+    var modal = $("<a/>").attr("href", "#viewFavorModal").attr("role", "button").attr("data-toggle", "modal").attr("data-backdrop", "static").attr("id", "favor_" + feed._id);
+
     return $("<div/>").addClass("feed-item panel").append(
+            modal.append(
             (feed.status == "unclaimed") && (feed.user._id != user._id) ? claimButton : "",
             (feed.status == "claimed") && (feed.claimer._id == user._id) ? unclaimButton : "",
             image,
             title,
             comments,
-            newComment
+            newComment)
     );
 }
 

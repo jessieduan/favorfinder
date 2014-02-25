@@ -63,6 +63,7 @@ app.get('/reset_data', login.reset);
 
 app.post('/add_posting', postings.add);
 app.get('/view_postings', postings.view);
+app.get('/find_posting/:id', postings.find_posting);
 app.post('/claim/:id', postings.claim);
 app.post('/unclaim/:id', postings.unclaim);
 app.post('/complete/:id', postings.complete);
