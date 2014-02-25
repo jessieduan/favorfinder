@@ -16,7 +16,7 @@ function initializePage() {
 }
 
 function showOptions() {
-    $("#add-anchor").click(function() {
+    var func = function() {
        $.getJSON("/view_users", function(data) {
             var users = data.users;
             data.users.forEach(function(user) {
@@ -24,19 +24,35 @@ function showOptions() {
             });
 
             var me = data.me;
+            var dict_name_id = {};
 
             $("#form-target").empty().append(
+                $("<option/>"),
                 users.filter(function(user) {
                     return user._id != me._id;
                 }).map(function(user) {
+                    dict_name_id[user.name] = user._id;
                     return $("<option/>")
                         .data("info", user)
                         .text(user.name)
                         .val(user._id);
                 })
             );
+
+            console.log(dict_name_id);
+            setTimeout(function()  {
+                var curr_name = $("#profile-name").text();
+                console.log(curr_name);
+                if (dict_name_id[curr_name]) {
+                    $("#form-target").val(dict_name_id[curr_name]);
+                }
+            }, 200);
       });
-    });
+    }
+
+    $("#add-anchor").click(func);
+    $("#request-favor").click(func);
+    $("#offer-favor").click(func);
 }
 
 function refreshFeed() {
@@ -138,6 +154,8 @@ function modalSubmit() {
         if (data.target) {
             data.target = favor.users[data.target];
         }
+
+        data.isOffer = $("#sent").hasClass("active");
 
         var alert_message = "";
         if (!data.name) {
@@ -270,7 +288,7 @@ function dynamicWishlist() {
        $.getJSON("/view_postings", function(data) {
            var user_id = $("#userid").text();
            var wishlist = data.postings.filter(function(item) {
-              return !item.is_offer && (item.user._id == user_id) &&
+              return (!item.isOffer) && (item.user._id == user_id) &&
                  (item.status === "unclaimed");
            });
            var history = data.postings.filter(function(item) {
@@ -278,7 +296,7 @@ function dynamicWishlist() {
                  (item.claimer && (item.claimer._id == user_id));
            });
            console.log(history);
-           var wishlist_items = history.map(function(item) {
+           var wishlist_items = wishlist.map(function(item) {
                if (item.user._id == user_id) {
                     return $("<li/>").text(item.description);
                }
@@ -298,6 +316,7 @@ function dynamicWishlist() {
 function setupProfileFavors() {
     $("#request-favor").click(function(e) {
         $("#favor-btn").click();
+        $("#add-anchor").click();
         changeToRequestFavor();
     });
 

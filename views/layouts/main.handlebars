@@ -84,16 +84,8 @@
 
         <div class="form-group">
           <label id="notification-type">Send Request (optional):</label>
-          <select multiple class="form-control" name="target" id="form-target">
-            <!-- Static names -->
-            <option>Heidi</option>
-            <option>Ben</option>
-            <option>Yongxing</option>
-            <option>Jessie</option>
-            <!-- Will work with Mongo -->
-            {{#each userlist}}
-            <option>{{name}}</option>
-            {{/each}}
+          <select class="form-control" name="target" id="form-target">
+              <option/>
           </select>
         </div>
 

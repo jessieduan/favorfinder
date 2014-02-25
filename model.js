@@ -46,27 +46,27 @@ exports.reloadData = function(func) {
 
         postings.insert([
             {user: yongxing, name: "Boba", description: "Can someone get me some boba?",
-                isPrivate: true, status: STATUS.UNCLAIMED, comments: [], is_offer: false,
+                isPrivate: true, status: STATUS.UNCLAIMED, comments: [], isOffer: false,
                 target: jessie},
             {user: ben, name: "Colored Pants", description: "I need more colored pants!",
-                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], is_offer: false,
+                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], isOffer: false,
                 target: yongxing},
             {user: yongxing, name: "Longboard", description: "I want to learn how to longboard!",
-                isPrivate: false, status: STATUS.CLAIMED, claimer: ben, is_offer: false,
+                isPrivate: false, status: STATUS.CLAIMED, claimer: ben, isOffer: false,
                 comments: [generateComment(ben, "I got you dude!")]},
             {user: ben, name: "Identity Parade", description: "Would someone listen to our latest album and give us some feedback?", 
-                isPrivate: false, status: STATUS.COMPLETE, is_offer: false,
+                isPrivate: false, status: STATUS.COMPLETE, isOffer: false,
                 claimer: heidi, comments: [generateComment(heidi, "It sounds really good! You are a rock star, Ben!")]},
             {user: jessie, name: "Ice Blocking", description: "Anyone have giant blocks of ice?",
-                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], is_offer: false},
+                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], isOffer: false},
             {user: ben, name: "Hug", description: "Heidi, can you give me a hug please?",
-                isPrivate: true, status: STATUS.UNCLAIMED, comments: [], is_offer: false,
+                isPrivate: true, status: STATUS.UNCLAIMED, comments: [], isOffer: false,
                 target: heidi},
             {user: heidi, name: "Grade assignemnts", description: "Can someone help me grade all these CS147 assignments?",
-                isPrivate: false, status: STATUS.CLAIMED, comments: [], is_offer: false,
+                isPrivate: false, status: STATUS.CLAIMED, comments: [], isOffer: false,
                 claimer: jessie},
             {user: heidi, name: "Donuts!", description: "I have a dozen Happy Donuts! Come get it :)",
-                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], is_offer: true}
+                isPrivate: false, status: STATUS.UNCLAIMED, comments: [], isOffer: true}
         ]);
     });
 }
