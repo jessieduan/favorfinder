@@ -187,14 +187,26 @@ function dynamicWishlist() {
     if ($("#wishlist").length > 0) {
        $.getJSON("/view_postings", function(data) {
            var user_id = $("#userid").text();
-           var wishlist = data.filter(function(item) {
+           var wishlist = data.postings.filter(function(item) {
               return !item.is_offer && (item.user._id == user_id) &&
                  (item.status === "unclaimed");
            });
-           var history = data.filter(function() {
-              return true;      
+           var history = data.postings.filter(function(item) {
+              return (item.user._id == user_id) || 
+                 (item.claimer && (item.claimer._id == user_id));
            });
+
+           var wishlist_items = history.map(function(item) {
+               // note to Jessie: Change this function
+               return $("<div/>").text(item.description);
+           });
+           var history_items = history.map(function(item) {
+               // note to Jessie: change this function
+               return $("<div/>").text(item.description);
+           });
+
+           $("#wishlist").empty().append(wishlist_items);
+           $("#history").empty().append(history_items);
        });
-        
     }
 }
