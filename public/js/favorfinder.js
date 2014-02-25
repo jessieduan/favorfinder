@@ -84,6 +84,7 @@ function refreshFeed() {
             $(".news-feed-fake").append(items.map(function(feed) {
                 return generateFeedItem(feed, user);
             }));
+            $(".feed-item").after("<hr>");
 
             items.map(function(feed) {
                 $("#favor_" + feed._id).click(populateViewModal);
@@ -222,11 +223,13 @@ function setupLoadFeed() {
 
 function generateFeedItem(feed, user) {
     var titleDiv;
+    var icon;
+    var spacer = $("<div/>").addClass("spacer");
     var description = $("<div/>").text(feed.description);
-    var image = $("<div/>").append(
+    var image = $("<div/>").addClass("feed-image-div").append(
             $("<img/>").addClass("feed-item-image").attr("src", feed.user.pic)
         );
-    var claimButton = $("<button/>").text("Claim").click(function() {
+/*    var claimButton = $("<button/>").text("Claim").click(function() {
         $.ajax({
             type: "POST",
             url: "/claim/" + feed._id,
@@ -268,13 +271,16 @@ function generateFeedItem(feed, user) {
                 );
             })
         );
+*/
     if (feed.status == "unclaimed") {
+        icon = $("<span/>").addClass("glyphicon glyphicon-send in-progress icon");
         title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
                 $("<span/>").addClass("text-muted").text(" added a request "),
                 $("<span/>").text(feed.name)
             );
     } else if (feed.status == "claimed") {
+        icon = $("<span/>").addClass("glyphicon glyphicon-bullhorn icon");
         title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
                 $("<span/>").addClass("text-muted").text(" claimed "),
@@ -283,6 +289,7 @@ function generateFeedItem(feed, user) {
                 $("<span/>").text(feed.name)
             );
     } else {
+        icon = $("<span/>").addClass("glyphicon glyphicon-ok success icon");
         title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
                 $("<span/>").addClass("text-muted").text(" completed "),
@@ -296,12 +303,14 @@ function generateFeedItem(feed, user) {
 
     return $("<div/>").addClass("feed-item panel").append(
             modal.append(
-            (feed.status == "unclaimed") && (feed.user._id != user._id) ? claimButton : "",
-            (feed.status == "claimed") && (feed.claimer._id == user._id) ? unclaimButton : "",
+            //(feed.status == "unclaimed") && (feed.user._id != user._id) ? claimButton : "",
+            //(feed.status == "claimed") && (feed.claimer._id == user._id) ? unclaimButton : "",
+            icon,
             image,
             title,
-            comments,
-            newComment)
+            spacer)
+            //comments,
+            //newComment)
     );
 }
 

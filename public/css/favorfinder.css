@@ -107,6 +107,7 @@ textarea:focus, input:focus{
 .feed-item {
     padding: 5px;
     color: black;
+    background-color: rgb(38, 43, 43);
 }
 
 .feed-item-title {
@@ -180,7 +181,7 @@ textarea:focus, input:focus{
 }
 
 .modal .btn{
-	font-size: 13px;
+	font-size: 12px;
 }
 
 .alert-danger {
@@ -189,5 +190,24 @@ textarea:focus, input:focus{
 
 .alert-success {
     text-align: center;
+    top: 25%;
     position: absolute;
+}
+
+.feed-item .icon{
+	font-size: 25px;
+	padding-right: 5px;
+	padding-top: 7px;
+	float: left;
+}
+
+.feed-image-div {
+	width: 40px;
+	height: 40px;
+	float: left;
+}
+.feed-item-title{
+	width: 200px;
+	padding-left: 10px;
+	float: left;
 }
