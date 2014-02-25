@@ -183,6 +183,11 @@ textarea:focus, input:focus{
 	font-size: 13px;
 }
 
-.alert {
+.alert-danger {
     display: none;
+}
+
+.alert-success {
+    text-align: center;
+    position: absolute;
 }

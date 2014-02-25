@@ -127,7 +127,7 @@ function modalSubmit() {
     $(".modal-submit").click(function(e) {
         e.preventDefault();
 
-        $(".alert").hide();
+        $(".alert-danger").hide();
 
         var button = $(this);
         var form = button.closest("form");
@@ -146,7 +146,7 @@ function modalSubmit() {
             alert_message = "Required field: Description.";
         }
         if (alert_message) {
-            $(".alert").text(alert_message).show();
+            $(".alert-danger").text(alert_message).show();
             return;
         }
 
@@ -161,6 +161,14 @@ function modalSubmit() {
         });
         
         modal.modal("hide");
+
+        $(".container").prepend(
+            $("<div/>").addClass("alert alert-success")
+                .append(
+                    $("<strong/>").text("Success! "),
+                    $("<span/>").text(" Your favor has been submitted.")
+                ).delay(2000).fadeOut()
+        );
     });
 };
 
