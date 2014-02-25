@@ -9,7 +9,7 @@ exports.view = helpers.verifyLogin(function(req, res, me){
                 title: user.name,
                 page: 'profile',
                 user: user,
-                show_buttons: (me._id != user._id)
+                show_buttons: (me.name !== user.name)
             });
         }
     });
