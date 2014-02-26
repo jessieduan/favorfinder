@@ -2,14 +2,22 @@ var model = require('../model');
 var helpers = require('../helpers');
 
 exports.view = helpers.verifyLogin(function(req, res, me){
-    user_id = req.params.id || req.cookies.user;
-    model.findUser(user_id, function(e, user) {
-        if (user) {
+    user_id = req.cookies.user;
+    prof_user_id = req.params.id || user_id;
+    var user;
+    model.findUser(user_id, function(e, found_user) {
+        if(found_user){
+            user = found_user;
+        }
+    });
+    model.findUser(prof_user_id, function(e, prof_user) {
+        if (prof_user) {
             res.render('profile', { 
-                title: user.name,
+                title: prof_user.name,
                 page: 'profile',
                 user: user,
-                show_buttons: (me.name !== user.name)
+                prof_user: prof_user,
+                show_buttons: (me.name !== prof_user.name)
             });
         }
     });

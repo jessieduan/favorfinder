@@ -1,9 +1,9 @@
     <div class="prof-header" style="background-image: url('/images/halfpipe.png')">
         <div class="faded-filter">
-            <div class="circle" style="background-image: url({{user.pic}})"></div>
+            <div class="circle" style="background-image: url({{prof_user.pic}})"></div>
             <div class = "about">
-                <h3 id="profile-name">{{user.name}}</h3>
-                <div style="display:none" id="userid">{{user._id}}</div>
+                <h3 id="profile-name">{{prof_user.name}}</h3>
+                <div style="display:none" id="userid">{{prof_user._id}}</div>
                 <p> 43 Favors received, 127 Favors completed
             </div>
         </div>
@@ -44,7 +44,7 @@
             </div>
             <div id="resources">
                 <ul>
-                    {{#each user.resources}}
+                    {{#each prof_user.resources}}
                         <li>{{this}}</li>
                     {{/each}}
                 </ul>
