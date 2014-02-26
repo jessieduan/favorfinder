@@ -51,6 +51,6 @@
 	font-size: 13px;
 }
 
-a:visited, a:link {
+.container a:visited, a:link {
 	color: rgb(218, 234, 240);
 }
