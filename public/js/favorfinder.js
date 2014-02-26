@@ -106,9 +106,16 @@ function populateFavorModal(favor_id) {
         var favor = data.posting[0];
         console.log(favor);
         $("#favor-title").text(favor.name); 
+        $("#profile-link").attr("href", "/profile/" + favor.user._id);
         $("#favor-img").attr("src", favor.user.pic);
-        $("#favor-status").text(favor.status);
-    
+        if(favor.status == "claimed" || favor.status == "complete"){
+            $("#favor-status").text(favor.status + " by ").append(
+                $("<a/>").attr("href", "/profile/" + favor.claimer._id).text(favor.claimer.name)
+            );
+        } else {
+             $("#favor-status").text(favor.status);
+        }
+
         var claimButton = $("<button/>").text("Claim").click(function() {
             $.ajax({
                 type: "POST",
