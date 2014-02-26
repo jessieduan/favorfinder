@@ -68,13 +68,13 @@ function refreshFeed() {
             var search_type = $(".search-btn.active").attr("search-type");
             if (search_type == "claimed") {
                 items = items.filter(function(item) {
-                    return item.claimer && (item.claimer._id == user._id);
+                    return item.claimer && (item.claimer._id == user._id) && (item.status != "complete");
                 });
             } else if (search_type == "inbox") {
                 items = items.filter(function(item) {
                     return item.target && (item.target._id == user._id);
                 });
-            } else if (search_type == "created") {
+            } else if (search_type == "sent") {
                 items = items.filter(function(item) {
                     return item.user._id == user._id;
                 });
