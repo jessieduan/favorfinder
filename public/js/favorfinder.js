@@ -98,13 +98,78 @@ function populateViewModal() {
     var favor_id = this.id.substring(6);
     var postings = $.getJSON("/find_posting/" + favor_id);
     postings.done(function(data) {
+
         var favor = data.posting[0];
         console.log(favor);
-        $("#favor-title").text(favor.name);
-        $("#favor-desc").text(favor.description);
-        // BEN: ADD TO MODAL HERE
-    })
+        $("#favor-title").text(favor.name); 
+        $("#favor-img").attr("src", favor.user.pic);
+        $("#favor-status").text(favor.status);
+    
+        var claimButton = $("<button/>").text("Claim").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/claim/" + feed._id,
+                complete: function() {
+                    refreshFeed();
+                },
+                dataType: "JSON",
+            });
+        });
+        var unclaimButton = $("<button/>").text("Unclaim").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/unclaim/" + feed._id,
+                complete: function() {
+                    refreshFeed();
+                },
+                dataType: "JSON",
+            });
+        });
+        var newComment = $("<input/>").keyup(function(e) {
+            if (e.keyCode == 13) {
+                $.ajax({
+                    type: "POST",
+                    url: "/comment/" + favor._id,
+                    complete: function() {
+                        refreshFeed();
+                    },
+                    data: {"comment": $(this).val()},
+                    dataType: "JSON",
+                });
+                $(".comment-box").append(function() {
+                    return $("<div/>").append(
+                        $("<a/>").attr("href", "/profile/").text("TO BE FIXED"), // FIX THISSSS
+                        $("<span/>").text(": "),
+                        $("<span/>").text($(this).val())
+                    );
+                });
+                $(this).val("");    
+            }
+        });
+        var newCommentLabel = $("<p/>").addClass("modal-label").text("Add a comment: ");
+        var comments = $("<div/>").addClass("comment-box").append(
+                $("<p/>").addClass("modal-label").text("Comments: "),
+                (favor.comments.length == 0) ? $("<p/>").text("No Comments to Show") : 
+                favor.comments.map(function(comment) {
+                    return $("<div/>").append(
+                        $("<a/>").attr("href", "/profile/" + comment.user._id).text(comment.user.name),
+                        $("<span/>").text(": "),
+                        $("<span/>").text(comment.comment)
+                    );
+                })
+            );
+        var description = $("<div/>").append(
+                $("<p/>").addClass("modal-label").text("Description: "),
+                $("<p/>").text(favor.description)
+            );
+        $(".modal-body").html(description).append(
 
+            //claimButton,
+            //(favor.status == "claimed") && (favor.claimer._id == user._id) ? unclaimButton : "",
+            comments,
+            newCommentLabel, 
+            newComment);
+    });
 }
 
 function initializeModal(){
@@ -313,6 +378,7 @@ function generateFeedItem(feed, user) {
             //newComment)
     );
 }
+
 
 function dynamicWishlist() {
     if ($("#wishlist").length > 0) {
