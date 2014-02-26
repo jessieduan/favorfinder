@@ -8,3 +8,9 @@
 	color:black;
 	box-shadow: 10px 10px 5px #888888;
 }
+
+.clear-search{
+	float: right;
+	margin-right: 3px;
+	margin-top: 4px;
+}

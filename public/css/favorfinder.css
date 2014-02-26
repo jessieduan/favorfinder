@@ -57,7 +57,7 @@ hr{
 
 .search-box input {
 	border: none;
-	width: 90%;
+	width: 80%;
 	display: inline-block;
 	background: inherit;
 	color: inherit;
@@ -223,6 +223,7 @@ textarea:focus, input:focus{
     left: 3%; 
     width: auto; 
     margin: 0; 
+    -webkit-overflow-scrolling: touch; 
 }
 
 .modal-body { 
