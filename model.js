@@ -62,9 +62,12 @@ exports.reloadData = function(func) {
             {user: ben, name: "Hug", description: "Heidi, can you give me a hug please?",
                 isPrivate: true, status: STATUS.UNCLAIMED, comments: [], isOffer: false,
                 target: heidi},
-            {user: heidi, name: "Grade assignemnts", description: "Can someone help me grade all these CS147 assignments?",
+            {user: heidi, name: "Grade assignments", description: "Can someone help me grade all these CS147 assignments?",
                 isPrivate: false, status: STATUS.CLAIMED, comments: [], isOffer: false,
                 claimer: jessie},
+            {user: jessie, name: "GTGTC", description: "Spam the high schoolers!",
+                isPrivate: false, status: STATUS.CLAIMED, comments: [], isOffer: false,
+                claimer: heidi},
             {user: heidi, name: "Donuts!", description: "I have a dozen Happy Donuts! Come get it :)",
                 isPrivate: false, status: STATUS.UNCLAIMED, comments: [], isOffer: true}
         ]);
