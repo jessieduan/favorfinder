@@ -104,7 +104,6 @@ function populateFavorModal(favor_id) {
     var postings = $.getJSON("/find_posting/" + favor_id);
     postings.done(function(data) {
         var favor = data.posting[0];
-        console.log(favor);
         $("#favor-title").text(favor.name); 
         $("#profile-link").attr("href", "/profile/" + favor.user._id);
         $("#favor-img").attr("src", favor.user.pic);
@@ -362,17 +361,31 @@ function dynamicWishlist() {
            });
            var wishlist_items = wishlist.map(function(item) {
                if (item.user._id == user_id) {
-                    return $("<li/>").text(item.description);
+                    var modal = $("<a/>").attr("href", "#viewFavorModal").attr("role", "button").attr("data-toggle", "modal").attr("data-backdrop", "static").attr("id", "favor_" + item._id);
+                    return $("<li/>").html(modal.text(item.description));
                }
            });
            var history_items = history.map(function(item) {
                 if (item.claimer) {
-                    return $("<li/>").text(item.claimer.name + " helped " + item.user.name + " with " + item.name);
+                    var modal = $("<a/>").attr("href", "#viewFavorModal").attr("role", "button").attr("data-toggle", "modal").attr("data-backdrop", "static").attr("id", "favor_" + item._id);
+                    return $("<li/>").html(modal.text(item.claimer.name + " helped " + item.user.name + " with " + item.name));
                 }
            });
 
            $("#wishlist").empty().append(wishlist_items);
            $("#history").empty().append(history_items);
+
+           wishlist.map(function(feed) {
+                $("#favor_" + feed._id).click(function(){
+                    populateFavorModal(feed._id);
+                });
+            });
+
+            history.map(function(feed) {
+                $("#favor_" + feed._id).click(function(){
+                    populateFavorModal(feed._id);
+                });
+            });
        });
     }
 }

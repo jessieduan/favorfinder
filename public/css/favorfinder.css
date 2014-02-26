@@ -236,3 +236,9 @@ textarea:focus, input:focus{
     padding: 15px; 
  }
 
+#viewFavorModal {
+	margin:15px;
+	background: white;
+	color:black;
+	box-shadow: 10px 10px 5px #888888;
+}
