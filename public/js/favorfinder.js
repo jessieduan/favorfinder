@@ -68,7 +68,7 @@ function refreshFeed() {
             var search_type = $(".search-btn.active").attr("search-type");
             if (search_type == "claimed") {
                 items = items.filter(function(item) {
-                    return item.claimer && (item.claimer._id == user._id);
+                    return item.claimer && (item.claimer._id == user._id) && (item.status != "complete");
                 });
             } else if (search_type == "inbox") {
                 items = items.filter(function(item) {
