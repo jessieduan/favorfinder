@@ -74,7 +74,7 @@ function refreshFeed() {
                 items = items.filter(function(item) {
                     return item.target && (item.target._id == user._id);
                 });
-            } else if (search_type == "created") {
+            } else if (search_type == "sent") {
                 items = items.filter(function(item) {
                     return item.user._id == user._id;
                 });
