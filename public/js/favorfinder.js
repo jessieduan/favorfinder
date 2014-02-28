@@ -201,14 +201,14 @@ function changeToRequestFavor() {
         $("#modal-mode").text("Request a Favor");
         $("#modal-desc").text("Request a favor, either from specific friends or from the larger community through the newsfeed");
         $("#notification-type").text("Send Requests (optional):");
-        $("#addFavorSubmitBtn").val("Get Help!");
+        $("#addFavorSubmitBtn").val("Send Request!");
 }
 
 function changeToOfferFavor() {
     $("#modal-mode").text("Offer a Favor");
     $("#modal-desc").text("Notify others of your potential offer to help them out! ");
     $("#notification-type").text("Send Offers (optional):");
-    $("#addFavorSubmitBtn").val("Offer Help!");
+    $("#addFavorSubmitBtn").val("Send Offer!");
 }
 
 function setupSerializeObject(){
@@ -299,6 +299,7 @@ function setupLoadFeed() {
 function generateFeedItem(feed, user) {
     var titleDiv;
     var icon;
+    var info;
     var spacer = $("<div/>").addClass("spacer");
     var description = $("<div/>").text(feed.description);
     var image = $("<div/>").addClass("feed-image-div").append(
@@ -331,18 +332,21 @@ function generateFeedItem(feed, user) {
         );
     }
 
+    if(window.location.pathname == "/testB"){
+        info = $("<p/>").addClass("subtitle").text(feed.comments.length + " comments").append(
+            $("<span/>").text("Status: " + feed.status)
+        );
+    }
+
     var modal = $("<a/>").attr("href", "#viewFavorModal").attr("role", "button").attr("data-toggle", "modal").attr("data-backdrop", "static").attr("id", "favor_" + feed._id);
 
     return $("<div/>").addClass("feed-item panel").append(
             modal.append(
-            //(feed.status == "unclaimed") && (feed.user._id != user._id) ? claimButton : "",
-            //(feed.status == "claimed") && (feed.claimer._id == user._id) ? unclaimButton : "",
             icon,
             image,
             title,
-            spacer)
-            //comments,
-            //newComment)
+            spacer,
+            info)
     );
 }
 

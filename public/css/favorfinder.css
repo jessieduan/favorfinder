@@ -105,7 +105,8 @@ textarea:focus, input:focus{
 }
 
 .feed-item {
-    padding: 5px;
+    margin: 0px;
+	padding: 6px;
     color: black;
     background-color: rgb(38, 43, 43);
 }
@@ -241,4 +242,12 @@ textarea:focus, input:focus{
 	background: white;
 	color:black;
 	box-shadow: 10px 10px 5px #888888;
+}
+
+.feed-item p {
+	margin: 0px;
+}
+
+.feed-item p span{
+	margin-left: 15px;
 }
