@@ -175,6 +175,13 @@ exports.completePosting = function(user, id, callback) {
     );
 }
 
+exports.uncompletePosting = function(user, id, callback) {
+    postings.update(
+        {"_id": id},
+        {$set: {"status": STATUS.CLAIMED}}
+    );
+}
+
 exports.commentPosting = function(user, id, comment, callback) {
     postings.update(
         {"_id": id},

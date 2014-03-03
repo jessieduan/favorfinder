@@ -68,6 +68,7 @@ app.get('/find_posting/:id', postings.find_posting);
 app.post('/claim/:id', postings.claim);
 app.post('/unclaim/:id', postings.unclaim);
 app.post('/complete/:id', postings.complete);
+app.post('/uncomplete/:id', postings.uncomplete);
 app.post('/comment/:id', postings.comment);
 
 
