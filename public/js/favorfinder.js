@@ -137,6 +137,28 @@ function populateFavorModal(favor_id) {
                 dataType: "JSON",
             });
         });
+        var completeButton = $("<button/>").text("Complete").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/complete/" + favor._id,
+                complete: function() {
+                    refreshFeed();
+                    populateFavorModal(favor_id);
+                },
+                dataType: "JSON",
+            });
+        });
+        var uncompleteButton = $("<button/>").text("Uncomplete").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/uncomplete/" + favor._id,
+                complete: function() {
+                    refreshFeed();
+                    populateFavorModal(favor_id);
+                },
+                dataType: "JSON",
+            });
+        });
         var newComment = $("<input/>").keyup(function(e) {
             if (e.keyCode == 13) {
                 $.ajax({
@@ -176,6 +198,9 @@ function populateFavorModal(favor_id) {
             $("#favor-claimer").html(claimButton);
         } else if ((favor.status == "claimed") && (favor.claimer._id == user._id)){
             $("#favor-claimer").html(unclaimButton);
+            $("#favor-claimer").append(completeButton);
+        } else if ((favor.status == "complete") && (favor.claimer._id == user._id)){
+            $("#favor-claimer").html(uncompleteButton);
         } else {
             $("#favor-claimer").html("");
         }

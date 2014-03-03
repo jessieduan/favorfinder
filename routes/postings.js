@@ -45,6 +45,11 @@ exports.complete = helpers.verifyLogin(function(req, res, user) {
     res.json("Success");
 });
 
+exports.uncomplete = helpers.verifyLogin(function(req, res, user) {
+    model.uncompletePosting(user, req.params.id);
+    res.json("Success");
+});
+
 exports.comment = helpers.verifyLogin(function(req, res, user) {
     model.commentPosting(user, req.params.id, req.body.comment);
     res.json("Success");
