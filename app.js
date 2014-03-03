@@ -54,19 +54,22 @@ app.get('/settings', settings.view);
 
 app.get('/add_user', login.add_user);
 app.get('/view_users', login.view_users);
-app.get('/login', login.view);
-app.get('/post_login', login.login);
+app.get('/login', login.login);
+app.get('/login_super', login.login_super);
+app.get('/post_login', login.post_login);
 app.get('/logout', login.logout);
 app.get('/reset_data', login.reset);
 
 
 app.post('/add_posting', postings.add);
 app.get('/view_postings', postings.view);
+app.get('/remove/:id', postings.remove);
 app.get('/find_posting/:id', postings.find_posting);
 app.post('/claim/:id', postings.claim);
 app.post('/unclaim/:id', postings.unclaim);
 app.post('/complete/:id', postings.complete);
 app.post('/comment/:id', postings.comment);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

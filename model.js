@@ -75,8 +75,14 @@ exports.reloadData = function(func) {
 }
 
 exports.addUser = function(params, callback) {
-    var name = params.name;
-    var email = params.email;
+    function randomString() {
+        return Math.floor((Math.random() * 10000) + 1);
+    }
+    var name = params.name || ("No Name " + randomString());
+    var email = params.email || (randomString() + "@gmail.com");
+    var resources = [];
+        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "/images/yongxing_profile.jpg",
+            resources: ["SanGuoSha", "A car"]},
     users.insert({
         name: name,
         email: email
@@ -120,7 +126,7 @@ exports.addPosting = function(user, params, callback) {
 
 exports.findPostings = function(params, callback) {
     query_str = params.query_str || "";
-    num = params.num || 10;
+    num = params.num || 30;
 
     query = {};
     if (query_str) {
@@ -173,6 +179,12 @@ exports.commentPosting = function(user, id, comment, callback) {
     postings.update(
         {"_id": id},
         {$push: {"comments": generateComment(user, comment)}}
+    );
+}
+
+exports.removePosting = function(user, id, callback) {
+    postings.remove(
+        {"_id": id}
     );
 }
         

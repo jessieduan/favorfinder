@@ -1,13 +1,17 @@
 var model = require('../model');
 var helpers = require('../helpers');
 
-exports.view = function(req, res) {
+exports.login_super = function(req, res) {
     model.findAllUsers(function(e, users) {
         res.render('login', {
             users: users
         });
     });
 };
+
+exports.login = function(req, res) {
+    res.render('login_guest'); 
+}
 
 exports.add_user = function(req, res) {
     var name = req.query.name;
@@ -23,7 +27,7 @@ exports.add_user = function(req, res) {
     });
 };
 
-exports.login = function(req, res){
+exports.post_login = function(req, res){
     // default user and redirect address
     var redirect_url = req.query.url || "/";
     var user_id = req.query.user || "52f40f941b77fc44b9000001";

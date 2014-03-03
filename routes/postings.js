@@ -30,6 +30,11 @@ exports.add = helpers.verifyLogin(function(req, res, user) {
     });
 });
 
+exports.remove = helpers.verifyLogin(function(req, res, user) {
+    model.removePosting(user, req.params.id);
+    res.json("Success");
+});
+
 exports.claim = helpers.verifyLogin(function(req, res, user) {
     model.claimPosting(user, req.params.id);
     res.json("Success");
