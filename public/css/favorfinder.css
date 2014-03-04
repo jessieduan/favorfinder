@@ -162,24 +162,13 @@ textarea:focus, input:focus{
 }
 
 .modal-body { 
+	text-align: center;
+	padding: 15px;
     max-height: 350px; 
     overflow-y: auto; 
     -webkit-overflow-scrolling: touch; 
+    height: 60%;
  }
-
- .modal { 
-	position: fixed; 
-	top: 3%; 
-	right: 3%; 
-	left: 3%; 
-	bottom: 3%; 
-	width: auto; 
-	margin: 0; 
-}
-
-.modal-body { 
-	height: 60%; 
-}
 
 .modal .btn{
 	font-size: 12px;
@@ -228,14 +217,6 @@ textarea:focus, input:focus{
     overflow-y: auto; 
 }
 
-.modal-body { 
-    height: 60%; 
-}
-
-.modal-body { 
-    max-height: 350px; 
-    padding: 15px; 
- }
 
 #viewFavorModal {
 	margin:15px;
