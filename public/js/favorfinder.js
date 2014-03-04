@@ -199,15 +199,27 @@ function populateFavorModal(favor_id) {
             newCommentLabel, 
             newComment
         );
-        if((favor.status == "unclaimed") && (favor.user._id != user._id)){
-            $("#favor-claimer").html(claimButton);
-        } else if ((favor.status == "claimed") && (favor.claimer._id == user._id)){
-            $("#favor-claimer").html(unclaimButton);
-            $("#favor-claimer").append(completeButton);
-        } else if ((favor.status == "complete") && (favor.claimer._id == user._id)){
-            $("#favor-claimer").html(uncompleteButton);
+        $("#favor-claimer").empty().append(claimButton, unclaimButton, completeButton, uncompleteButton);
+        if((favor.status == "unclaimed") && (favor.user.name != user.name)){
+            claimButton.show();
+            unclaimButton.hide();
+            completeButton.hide();
+            uncompleteButton.hide();
+        } else if ((favor.status == "claimed") && (favor.claimer.name == user.name)){
+            claimButton.hide();
+            unclaimButton.show();
+            completeButton.show();
+            uncompleteButton.hide();
+        } else if ((favor.status == "complete") && (favor.claimer.name == user.name)){
+            claimButton.hide();
+            unclaimButton.hide();
+            completeButton.hide();
+            uncompleteButton.show();
         } else {
-            $("#favor-claimer").html("");
+            claimButton.hide();
+            unclaimButton.hide();
+            completeButton.hide();
+            uncompleteButton.hide();
         }
     });
 }
