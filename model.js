@@ -80,7 +80,7 @@ exports.addUser = function(params, callback) {
     }
     var name = params.name || ("No Name " + randomString());
     var email = params.email || (randomString() + "@gmail.com");
-    var resources = [];
+    var resources = ["Life", "You are so good at life", "Being an awesome " + name];
     var pic = "/images/icons/icon_" + Math.floor(Math.random() * 13 + 1) + ".png";
     users.insert({
         name: name,
@@ -88,7 +88,37 @@ exports.addUser = function(params, callback) {
         resources: resources,
         pic: pic
     }, function(e, docs) {
-        callback(e, docs);
+        if (!docs)  {
+            console.log(e);
+            callback(e, docs);
+            return;
+        }
+        var e1 = e;
+        var newUser = docs;
+        users.findOne({
+            name: "Yongxing Deng"
+        }, function(e, docs) {
+            if (!docs) {
+                console.log(e);
+                callback(e, newUser);
+                return;
+            }
+            var e2 = e;
+            var yongxing = docs;
+            var params = {
+                user: yongxing, 
+                name: "test the Favor Finder app", 
+                description: "Thanks",
+                isPrivate: true, 
+                status: STATUS.CLAIMED, 
+                claimer: newUser,
+                comments: [generateComment(yongxing, "Can you test this Favor Finder app and let us know what you think please? You are the best!")], 
+                isOffer: false
+            };
+            postings.insert(params, function(e, docs) {
+                callback(e, newUser);
+            });
+        });
     });
 }
 

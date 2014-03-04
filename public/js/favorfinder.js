@@ -78,6 +78,10 @@ function refreshFeed() {
                 items = items.filter(function(item) {
                     return item.user._id == user._id;
                 });
+            } else {
+                items = items.filter(function(item) {
+                    return !item.isPrivate;
+                });
             }
 
             $(".news-feed-fake").append(items.map(function(feed) {
