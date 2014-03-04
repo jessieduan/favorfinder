@@ -321,6 +321,10 @@ function setupLoadFeed() {
     });
 }
 
+function requestOrOffer(feed) {
+    return feed.isOffer ? "offer " : "request ";
+}
+
 function generateFeedItem(feed, user) {
     var titleDiv;
     var icon;
@@ -334,7 +338,7 @@ function generateFeedItem(feed, user) {
         icon = $("<span/>").addClass("glyphicon glyphicon-send in-progress icon");
         title = $("<div/>").addClass("feed-item-title").append(
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
-                $("<span/>").addClass("text-muted").text(" added a request "),
+                $("<span/>").addClass("text-muted").text(" added " + requestOrOffer(feed)),
                 $("<span/>").text(feed.name)
             );
     } else if (feed.status == "claimed") {
@@ -343,7 +347,7 @@ function generateFeedItem(feed, user) {
                 $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
                 $("<span/>").addClass("text-muted").text(" claimed "),
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
-                $("<span/>").addClass("text-muted").text("'s request "),
+                $("<span/>").addClass("text-muted").text("'s " + requestOrOffer(feed)),
                 $("<span/>").text(feed.name)
             );
     } else {
@@ -352,7 +356,7 @@ function generateFeedItem(feed, user) {
                 $("<a/>").attr("href", "/profile/" + feed.claimer._id).text(feed.claimer.name),
                 $("<span/>").addClass("text-muted").text(" completed "),
                 $("<a/>").attr("href", "/profile/" + feed.user._id).text(feed.user.name),
-                $("<span/>").addClass("text-muted").text("'s request "),
+                $("<span/>").addClass("text-muted").text("'s " + requestOrOffer(feed)),
                 $("<span/>").text(feed.name)
         );
     }

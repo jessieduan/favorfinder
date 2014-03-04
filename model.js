@@ -93,6 +93,9 @@ exports.addUser = function(params, callback) {
 }
 
 exports.addOrFindUser = function(params, callback) {
+    function randomString() {
+        return Math.floor((Math.random() * 10000) + 1);
+    }
     var name = params.name || ("No Name " + randomString());
     users.findOne({
         name: name
