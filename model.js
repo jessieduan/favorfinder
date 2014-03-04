@@ -81,13 +81,26 @@ exports.addUser = function(params, callback) {
     var name = params.name || ("No Name " + randomString());
     var email = params.email || (randomString() + "@gmail.com");
     var resources = [];
-        {name: "Yongxing Deng", email: "yxdeng@stanford.edu", pic: "/images/yongxing_profile.jpg",
-            resources: ["SanGuoSha", "A car"]},
+    var pic = "/images/icons/icon_" + Math.floor(Math.random() * 13 + 1) + ".png";
     users.insert({
         name: name,
-        email: email
+        email: email,
+        resources: resources,
+        pic: pic
     }, function(e, docs) {
         callback(e, docs);
+    });
+}
+
+exports.addOrFindUser = function(params, callback) {
+    var name = params.name || ("No Name " + randomString());
+    users.findOne({
+        name: name
+    }, function(e, docs) {
+        if (docs)
+            callback(e, docs);
+        else
+            exports.addUser(params, callback); 
     });
 }
         
@@ -175,13 +188,6 @@ exports.completePosting = function(user, id, callback) {
     );
 }
 
-exports.uncompletePosting = function(user, id, callback) {
-    postings.update(
-        {"_id": id},
-        {$set: {"status": STATUS.CLAIMED}}
-    );
-}
-
 exports.commentPosting = function(user, id, comment, callback) {
     postings.update(
         {"_id": id},
@@ -191,6 +197,12 @@ exports.commentPosting = function(user, id, comment, callback) {
 
 exports.removePosting = function(user, id, callback) {
     postings.remove(
+        {"_id": id}
+    );
+}
+        
+exports.removeUser = function(user, id, callback) {
+    users.remove(
         {"_id": id}
     );
 }

@@ -53,6 +53,8 @@ app.get('/profile/:id', profile.view);
 app.get('/settings', settings.view);
 
 app.get('/add_user', login.add_user);
+app.post('/add_user', login.add_user);
+
 app.get('/view_users', login.view_users);
 app.get('/login', login.login);
 app.get('/login_super', login.login_super);
@@ -60,6 +62,7 @@ app.get('/post_login', login.post_login);
 app.get('/logout', login.logout);
 app.get('/reset_data', login.reset);
 
+app.get('/remove_user_omg', login.remove_user);
 
 app.post('/add_posting', postings.add);
 app.get('/view_postings', postings.view);

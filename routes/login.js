@@ -14,7 +14,7 @@ exports.login = function(req, res) {
 }
 
 exports.add_user = function(req, res) {
-    var name = req.query.name;
+    var name = req.query.name || req.params.name || req.body.name;
     var email = req.query.email;
 
     var params = {
@@ -22,8 +22,11 @@ exports.add_user = function(req, res) {
         email: email
     };
 
-    model.addUser(params, function(e, docs) {
-        res.json(docs);
+    model.addOrFindUser(params, function(e, docs) {
+        if (docs)
+            res.redirect('/post_login?user=' + docs._id);
+        else
+            res.redirect('/login');
     });
 };
 
@@ -61,4 +64,10 @@ exports.view_users = helpers.verifyLogin(function(req, res, me) {
             "users": users
         });
     });
+});
+
+
+exports.remove_user = helpers.verifyLogin(function(req, res, user) {
+    model.removeUser(user, req.params.id);
+    res.json("Success");
 });
