@@ -88,6 +88,7 @@ function refreshFeed() {
             items.map(function(feed) {
                 $("#favor_" + feed._id).click(function(){
                     populateFavorModal(feed._id);
+                    ga("send", "event", "feed-item", "click");
                 });
             });
             
